@@ -1,0 +1,32 @@
+package com.rentaCar.rentaCarBackend.controller;
+
+import com.example.demo.connection.HttpResponse;
+import com.example.demo.connection.Response;
+import com.example.demo.service.CityService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
+
+@RestController
+@RequestMapping("/cities") // IZMENA
+public class CityController {
+
+    private final CityService cityService; // IZMENA
+
+    public CityController(CityService cityService) { // IZMENA
+        this.cityService = cityService;
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<Response> getAll() {
+        return ResponseEntity.ok(
+                HttpResponse.getResponseWithData(
+                        "Successfully found all cities!", // IZMENA
+                        Map.of("values", cityService.getAll()),
+                        HttpStatus.OK));
+    }
+}
