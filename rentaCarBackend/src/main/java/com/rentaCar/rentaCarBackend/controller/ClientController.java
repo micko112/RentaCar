@@ -1,9 +1,9 @@
 package com.rentaCar.rentaCarBackend.controller;
 
-import com.example.demo.connection.HttpResponse;
-import com.example.demo.connection.Response;
-import com.example.demo.dto.ClientDTO;
-import com.example.demo.service.ClientService;
+import com.rentaCar.rentaCarBackend.connection.HttpResponse;
+import com.rentaCar.rentaCarBackend.connection.Response;
+import com.rentaCar.rentaCarBackend.dto.ClientDTO;
+import com.rentaCar.rentaCarBackend.service.ClientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

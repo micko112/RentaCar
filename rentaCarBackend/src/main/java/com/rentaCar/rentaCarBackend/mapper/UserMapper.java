@@ -4,8 +4,8 @@
  */
 package com.rentaCar.rentaCarBackend.mapper;
 
-import com.example.demo.dto.UserDTO;
-import com.example.demo.model.User;
+import com.rentaCar.rentaCarBackend.dto.UserDTO;
+import com.rentaCar.rentaCarBackend.model.User;
 import org.springframework.stereotype.Component;
 
 /**

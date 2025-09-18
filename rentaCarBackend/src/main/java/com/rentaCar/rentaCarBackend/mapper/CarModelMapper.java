@@ -1,7 +1,7 @@
 package com.rentaCar.rentaCarBackend.mapper;
 
-import com.example.demo.dto.CarModelDTO;
-import com.example.demo.model.CarModel;
+import com.rentaCar.rentaCarBackend.dto.CarModelDTO;
+import com.rentaCar.rentaCarBackend.model.CarModel;
 import org.springframework.stereotype.Component;
 
 @Component
