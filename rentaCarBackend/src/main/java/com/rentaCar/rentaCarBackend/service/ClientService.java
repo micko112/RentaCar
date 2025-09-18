@@ -35,7 +35,7 @@ public class ClientService {
     public List<ClientDTO> searchClients(String searchDto) {
         List<Client> clients = clientRepository.findBySurnameStartsWith(searchDto);
         return clients.stream()
-                .map(clientMapper::toDomainDTO) // Pojednostavljeno mapiranje
+                .map(clientMapper::toDomainDTO)
                 .collect(Collectors.toList());
     }
 

@@ -4,8 +4,8 @@
  */
 package com.rentaCar.rentaCarBackend.mapper;
 
-import com.example.demo.dto.DomainDTO;
-import com.example.demo.model.DomainEntity;
+import com.rentaCar.rentaCarBackend.dto.DomainDTO;
+import com.rentaCar.rentaCarBackend.model.DomainEntity;
 
 /**
  *
