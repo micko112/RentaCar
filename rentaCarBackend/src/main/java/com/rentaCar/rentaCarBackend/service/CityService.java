@@ -1,9 +1,9 @@
 package com.rentaCar.rentaCarBackend.service;
 
-import com.example.demo.JPARepo.CityRepository;
-import com.example.demo.dto.CityDTO;
-import com.example.demo.mapper.CityMapper;
-import com.example.demo.model.City;
+import com.rentaCar.rentaCarBackend.JPARepo.CityRepository;
+import com.rentaCar.rentaCarBackend.dto.CityDTO;
+import com.rentaCar.rentaCarBackend.mapper.CityMapper;
+import com.rentaCar.rentaCarBackend.model.City;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

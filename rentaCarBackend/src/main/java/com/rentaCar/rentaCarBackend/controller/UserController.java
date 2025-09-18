@@ -1,7 +1,7 @@
 package com.rentaCar.rentaCarBackend.controller;
 
-import com.example.demo.dto.UserDTO;
-import com.example.demo.service.UserService;
+import com.rentaCar.rentaCarBackend.dto.UserDTO;
+import com.rentaCar.rentaCarBackend.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
