@@ -6,6 +6,7 @@ import { Client } from '../../models/client.model';
 
 @Component({
   selector: 'app-login-client',
+  standalone: false,
   templateUrl: './login-client.component.html',
   styleUrls: ['./login-client.component.css']
 })
