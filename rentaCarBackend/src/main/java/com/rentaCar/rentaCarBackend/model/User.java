@@ -1,8 +1,13 @@
 package com.rentaCar.rentaCarBackend.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 import java.io.Serializable;
+
 
 @Entity
 public class User implements Serializable, DomainEntity {
