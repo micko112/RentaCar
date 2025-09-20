@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { userService } from '../../services/user.service';
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +13,7 @@ export class LoginComponent {
   public loginForm!: FormGroup;
 
   constructor(
-    private userService: userService,
+    private userService: UserService,
     private router: Router,
     private formBuilder: FormBuilder
   ) {

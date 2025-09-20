@@ -8,7 +8,7 @@ import { User } from '../models/user.model';
 @Injectable({
   providedIn: 'root',
 })
-export class userService {
+export class UserService {
   constructor(private http: HttpClient) {}
 
   public login(username: String, password: String): Observable<Response> {
