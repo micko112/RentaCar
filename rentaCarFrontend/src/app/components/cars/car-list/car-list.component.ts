@@ -3,8 +3,10 @@ import { CarService } from '../../../services/car.service';
 import { Car } from '../../../models/car.model';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-car-list',
+  standalone: false,
   templateUrl: './car-list.component.html',
   styleUrls: ['./car-list.component.css']
 })

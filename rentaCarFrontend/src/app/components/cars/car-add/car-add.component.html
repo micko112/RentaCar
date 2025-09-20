@@ -1,1 +1,61 @@
-<p>car-add works!</p>
+<div class="form-page-container"> <!-- Koristim drugu klasu radi lakšeg stilizovanja -->
+  <h1>Dodaj Novo Vozilo</h1>
+
+  <form [formGroup]="newCarForm" (ngSubmit)="addCar()">
+    <div class="form-grid">
+      <div class="form-column">
+
+        <label for="licensePlate">Registarska oznaka:</label>
+        <input
+          type="text"
+          id="licensePlate"
+          formControlName="licensePlate"
+          placeholder="Npr. BG-123-TX"
+        />
+
+        <label for="year">Godište:</label>
+        <input
+          type="text"
+          id="year"
+          formControlName="year"
+          placeholder="Npr. 2022"
+        />
+
+        <label for="transmission">Menjač:</label>
+        <select id="transmission" formControlName="transmission">
+          <option value="manuelni">Manuelni</option>
+          <option value="automatik">Automatik</option>
+        </select>
+      </div>
+
+      <div class="form-column">
+        <label for="carModel">Model vozila:</label>
+        <select id="carModel" formControlName="carModel">
+          <option [ngValue]="null" disabled>Izaberite model</option>
+          <option *ngFor="let model of carModels" [ngValue]="model">
+            {{ model.name }}
+          </option>
+        </select>
+
+        <label for="notes">Napomene:</label>
+        <textarea
+          id="notes"
+          formControlName="notes"
+          placeholder="Dodatne informacije o vozilu"
+        ></textarea>
+
+        <label for="picture">URL Slike:</label>
+        <input
+          type="text"
+          id="picture"
+          formControlName="picture"
+          placeholder="Unesite URL slike"
+        />
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button type="submit" class="button" [disabled]="newCarForm.invalid">Dodaj Vozilo</button>
+    </div>
+  </form>
+</div>

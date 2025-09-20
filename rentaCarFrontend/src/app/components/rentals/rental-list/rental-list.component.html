@@ -1,1 +1,15 @@
-<p>rental-list works!</p>
+<div class="page-container">
+  <h1>Potvrđena Iznajmljivanja</h1>
+  <div *ngIf="!rentals || rentals.length === 0" class="no-items-message">
+    Nema potvrđenih iznajmljivanja.
+  </div>
+
+  <div class="card-grid" *ngIf="rentals && rentals.length > 0">
+    <app-rental-card
+      *ngFor="let r of rentals"
+      [rental]="r"
+      [viewContext]="'admin-list'"
+      (removedRental)="delete(r)"
+    ></app-rental-card>
+  </div>
+</div>

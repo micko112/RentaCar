@@ -5,10 +5,12 @@ import { CarService } from '../../../services/car.service';
 import { UserService } from '../../../services/user.service';
 import { ClientService } from '../../../services/client.service';
 import { RentalService } from '../../../services/rental.service';
+import {CarUpdateModalComponent} from '../car-update-modal/car-update-modal.component';
 
 @Component({
   selector: 'app-car-card',
   templateUrl: './car-card.component.html',
+  standalone: false,
   styleUrls: ['./car-card.component.css']
 })
 export class CarCardComponent {

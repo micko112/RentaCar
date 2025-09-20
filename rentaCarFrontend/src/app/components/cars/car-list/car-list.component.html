@@ -1,1 +1,23 @@
-<p>car-list works!</p>
+<div class="page-container">
+  <div class="content-container">
+    <h1>Naša Ponuda Vozila</h1>
+
+    <div class="search-bar">
+      <input
+        (input)="onSearch(search.value)"
+        type="text"
+        placeholder="Pretraži po registarskoj oznaci"
+        #search
+        class="search-input"
+      />
+    </div>
+
+    <div class="card-grid">
+      <app-car-card
+        *ngFor="let c of filteredCars"
+        [car]="c"
+        (removedCar)="deleteCar(c)"
+      ></app-car-card>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,13 @@
-<p>client-list works!</p>
+<div class="page-container">
+  <h1>Klijenti</h1>
+  <div class="search-bar">
+    <input (input)="onSearch(search.value)" type="text" placeholder="Pretraži klijente po prezimenu" #search class="search-input">
+  </div>
+  <div class="card-grid">
+    <app-client-card
+      *ngFor="let c of filteredClients"
+      [client]="c"
+      (removedClient)="deleteClient(c)">
+    </app-client-card>
+  </div>
+</div>

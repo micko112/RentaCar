@@ -1,1 +1,50 @@
-<p>car-update-modal works!</p>
+<div class="modal-backdrop">
+  <div class="modal-content">
+    <h2>Izmena Podataka o Vozilu</h2>
+
+    <div class="form-grid">
+      <div class="form-column">
+        <label>
+          Registarska oznaka:
+          <input type="text" [(ngModel)]="tempCar.licensePlate" />
+        </label>
+
+        <label>
+          Godište:
+          <input type="number" [(ngModel)]="tempCar.year" />
+        </label>
+
+        <label>
+          Menjač:
+          <input type="text" [(ngModel)]="tempCar.transmission" />
+        </label>
+      </div>
+
+      <div class="form-column">
+        <label>
+          Model vozila:
+          <select [(ngModel)]="tempCar.carModel">
+            <option *ngFor="let model of carModels" [ngValue]="model">
+              {{ model.name }}
+            </option>
+          </select>
+        </label>
+
+        <label>
+          Napomene:
+          <input type="text" [(ngModel)]="tempCar.notes" />
+        </label>
+
+        <label>
+          URL Slike:
+          <input type="text" [(ngModel)]="tempCar.picture" />
+        </label>
+      </div>
+    </div>
+
+    <div class="modal-buttons">
+      <button (click)="save()">Sačuvaj</button>
+      <button (click)="cancel()">Otkaži</button>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { CarService } from '../../../services/car.service';
 import { CarModelService } from '../../../services/car-model.service';
 import { Car } from '../../../models/car.model';
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-car-add',
   templateUrl: './car-add.component.html',
+  standalone: false,
   styleUrls: ['./car-add.component.css']
 })
 export class CarAddComponent implements OnInit {

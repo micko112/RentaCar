@@ -2,9 +2,11 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Car } from '../../../models/car.model';
 import { CarModel } from '../../../models/car-model.model';
 import { CarModelService } from '../../../services/car-model.service';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-car-update-modal',
+  standalone: false,
   templateUrl: './car-update-modal.component.html',
   styleUrls: ['./car-update-modal.component.css']
 })
