@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+/* Globalni stilovi - primenjuju se na celu aplikaciju */
+
+/* Importuj fontove sa Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;700&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #121212;
+}
+
+/* Stilovi za forme koji će se primenjivati svuda */
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #555;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  font-size: 1rem;
+}
+
+.button, button {
+  background-color: #007bff;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.button:hover, button:hover {
+  background-color: #0056b3;
+}
+
+.button:disabled, button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}

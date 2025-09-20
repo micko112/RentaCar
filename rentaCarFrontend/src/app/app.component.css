@@ -1,0 +1,99 @@
+/* Globalni stilovi za celu stranicu se sada nalaze u styles.css.
+   Ovaj fajl stilizuje samo komponente iz app.component.html. */
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #121212; /* Tamna pozadina za celu aplikaciju */
+  color: #e0e0e0; /* Svetliji tekst */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Oštar, poslovni font */
+}
+
+.navbar {
+  background-color: #1f1f1f; /* Malo svetlija nijansa za navigaciju */
+  border-bottom: 1px solid #333; /* Oštra linija ispod */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Suptilna senka */
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 20px; /* Dodajemo malo razmaka sa strane */
+  display: flex; /* Koristimo Flexbox za poravnanje */
+  justify-content: space-between; /* Razdvaja linkove od odjave */
+  align-items: center;
+  height: 60px; /* Fiksna visina navigacije */
+}
+
+.nav-links, .logout-section, .login-section {
+  display: flex;
+  align-items: center;
+}
+
+.navbar li {
+  display: inline-block;
+}
+
+.navbar li a {
+  display: block;
+  color: #e0e0e0;
+  text-align: center;
+  padding: 0 20px; /* Vertikalni padding je definisan visinom, horizontalni ovde */
+  text-decoration: none;
+  font-weight: 500;
+  line-height: 60px; /* Centriranje teksta vertikalno */
+  transition: background-color 0.3s, color 0.3s; /* Glatka tranzicija */
+  border-radius: 4px; /* Blago zaobljene ivice */
+  margin: 0 5px; /* Razmak između linkova */
+}
+
+.navbar li a:hover, .navbar li a.active {
+  background-color: #007bff; /* Jarka plava za akcenat */
+  color: #ffffff;
+}
+
+/* Stil za dropdown meni */
+.dropdown {
+  position: relative;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 60px; /* Pojavljuje se tačno ispod navigacije */
+  left: 0;
+  background-color: #2a2a2a; /* Tamnija pozadina za dropdown */
+  min-width: 180px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 0 0 4px 4px; /* Zaobljene samo donje ivice */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.submenu li {
+  display: block; /* Elementi su jedan ispod drugog */
+}
+
+.submenu li a {
+  width: 100%;
+  text-align: left;
+  line-height: 45px; /* Manja visina za dropdown linkove */
+}
+
+.dropdown:hover .submenu {
+  display: block;
+}
+
+/* Glavni kontejner stranice */
+.page-wrapper {
+  padding-top: 80px; /* Malo više prostora zbog fiksne navigacije */
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
