@@ -1,99 +1,64 @@
-/* Globalni stilovi za celu stranicu se sada nalaze u styles.css.
-   Ovaj fajl stilizuje samo komponente iz app.component.html. */
+/* GLOBALNI STILOVI */
 
-:host {
-  display: block;
-  min-height: 100vh;
-  background-color: #121212; /* Tamna pozadina za celu aplikaciju */
-  color: #e0e0e0; /* Svetliji tekst */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Oštar, poslovni font */
-}
+/* 1. Uvezi font koji koristiš svuda */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
-.navbar {
-  background-color: #1f1f1f; /* Malo svetlija nijansa za navigaciju */
-  border-bottom: 1px solid #333; /* Oštra linija ispod */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Suptilna senka */
-}
-
-.navbar ul {
-  list-style-type: none;
+/* 2. Osnovni reset i podešavanje fonta */
+html, body {
+  font-family: "Poppins", sans-serif;
   margin: 0;
-  padding: 0 20px; /* Dodajemo malo razmaka sa strane */
-  display: flex; /* Koristimo Flexbox za poravnanje */
-  justify-content: space-between; /* Razdvaja linkove od odjave */
-  align-items: center;
-  height: 60px; /* Fiksna visina navigacije */
-}
-
-.nav-links, .logout-section, .login-section {
-  display: flex;
-  align-items: center;
-}
-
-.navbar li {
-  display: inline-block;
-}
-
-.navbar li a {
-  display: block;
-  color: #e0e0e0;
-  text-align: center;
-  padding: 0 20px; /* Vertikalni padding je definisan visinom, horizontalni ovde */
-  text-decoration: none;
-  font-weight: 500;
-  line-height: 60px; /* Centriranje teksta vertikalno */
-  transition: background-color 0.3s, color 0.3s; /* Glatka tranzicija */
-  border-radius: 4px; /* Blago zaobljene ivice */
-  margin: 0 5px; /* Razmak između linkova */
-}
-
-.navbar li a:hover, .navbar li a.active {
-  background-color: #007bff; /* Jarka plava za akcenat */
-  color: #ffffff;
-}
-
-/* Stil za dropdown meni */
-.dropdown {
-  position: relative;
-}
-
-.submenu {
-  display: none;
-  position: absolute;
-  top: 60px; /* Pojavljuje se tačno ispod navigacije */
-  left: 0;
-  background-color: #2a2a2a; /* Tamnija pozadina za dropdown */
-  min-width: 180px;
-  list-style: none;
   padding: 0;
-  margin: 0;
-  border-radius: 0 0 4px 4px; /* Zaobljene samo donje ivice */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  min-height: 100vh;
+  /* Pozadinu definišemo po komponentama, ne globalno */
 }
 
-.submenu li {
-  display: block; /* Elementi su jedan ispod drugog */
+/* 3. Globalni stilovi za forme koje se ponavljaju */
+label {
+  font-weight: 600;
+  color: #0e1a35;
+  font-size: 14px;
 }
 
-.submenu li a {
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="number"],
+textarea,
+select {
+  padding: 12px 15px;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
   width: 100%;
-  text-align: left;
-  line-height: 45px; /* Manja visina za dropdown linkove */
+  box-sizing: border-box; /* Važno da padding ne širi element */
+  transition: 0.3s;
 }
 
-.dropdown:hover .submenu {
-  display: block;
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #82c0ff;
+  box-shadow: 0 0 8px rgba(130, 192, 255, 0.4);
 }
 
-/* Glavni kontejner stranice */
-.page-wrapper {
-  padding-top: 80px; /* Malo više prostora zbog fiksne navigacije */
-  padding-left: 2rem;
-  padding-right: 2rem;
+/* 4. Globalni stil za dugmad */
+.button, button {
+  background-color: #184fa1;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  transition: 0.3s;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+}
+
+.button:hover, button:hover {
+  background-color: #194493;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
 }
