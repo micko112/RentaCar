@@ -24,32 +24,40 @@ export class LoginClientComponent {
     });
   }
 
-  login(){
-    if(!this.loginForm.valid){
-      alert("Morate popuniti polja za korisničko ime i lozinku!");
+  login() {
+    if(!this.loginForm.valid) {
+      alert("Morate popuniti oba polja!");
       return;
     }
 
     const username = this.loginForm.get('username')!.value;
     const password = this.loginForm.get('password')!.value;
 
-    this.clientService.login(username, password).subscribe((res) => {
-      if(res.message !== 'Invalid username or password!'){
-        alert(res.message); // Prikazuje "Hello, Ime Prezime!"
+    this.clientService.login(username, password).subscribe({
+      next: (response) => {
+        // ISPRAVKA: Čitamo poruku iz response objekta
+        const message = response.message;
+        alert(message); // Prikazaće "Hello, Ime Prezime!"
 
-        // Logika za dobavljanje celog objekta klijenta
-        this.clientService.getAll().subscribe((data) => {
-          const clients = data.data.values as Client[];
-          const loggedInClient = clients.find(client => client.username === username);
+        // Sada radimo ostatak logike
+        if (message !== 'Invalid username or password!') {
+          this.clientService.getAll().subscribe((data) => {
+            const clients = data.data.values as Client[];
+            const loggedInClient = clients.find(client => client.username === username);
 
-          if (loggedInClient) {
-            this.clientService.setSessionData(res, loggedInClient);
-            this.router.navigate(['/cars']); // Preusmeri na listu automobila
-          }
-        });
-      } else {
-        alert("Pogrešno korisničko ime ili lozinka!");
-        return;
+            if (loggedInClient) {
+              this.clientService.setSessionData(response, loggedInClient);
+              this.router.navigate(['/cars']);
+            }
+          });
+        } else {
+          // Ovaj else verovatno nije ni potreban jer backend baca grešku
+        }
+      },
+      error: (err) => {
+        // Ako backend vrati grešku, hvatamo je ovde
+        alert('Pogrešno korisničko ime ili lozinka!');
+        console.error(err);
       }
     });
   }

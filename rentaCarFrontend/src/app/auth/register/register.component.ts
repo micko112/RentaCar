@@ -23,14 +23,14 @@ export class RegisterComponent implements OnInit {
     private router: Router
   ) {
     this.newClientForm = this.formBuilder.group({
-      jmbg: new FormControl('', [Validators.required, Validators.pattern(/^\d{13}$/)]),
-      name: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]),
-      surname: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]),
-      age: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]),
-      mobile: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]),
-      city: new FormControl(null, Validators.required), // <-- IZMENA (početna vrednost null)
-      username: new FormControl('', Validators.required),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      jmbg: ['', Validators.required],
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
+      age: ['', Validators.required],
+      mobile: ['', Validators.required],
+      city: [null, Validators.required],
+      username: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
