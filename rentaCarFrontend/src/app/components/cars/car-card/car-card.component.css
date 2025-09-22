@@ -1,12 +1,14 @@
-/* Stilovi specifični za car-card komponentu */
+/* --- Stil za pojedinačnu karticu --- */
 :host {
-  display: block;
+  display: flex; /* Omogućava da se sadržaj unutar kartice lepo rasporedi */
+  flex-direction: column; /* Sadržaj ide jedan ispod drugog */
   background-color: #1f1f1f;
   border: 1px solid #333;
   border-radius: 8px;
   padding: 1.5rem;
   transition: transform 0.3s, box-shadow 0.3s;
-  position: relative; /* Potrebno za modal */
+  position: relative;
+  /* NEMA VIŠE FIKSNE ŠIRINE (width) - ona dolazi iz grida */
 }
 
 :host(:hover) {
@@ -16,10 +18,14 @@
 
 .vehicle-picture {
   width: 100%;
-  height: 180px;
+  height: 180px; /* Može ostati fiksna visina za uniformnost */
   object-fit: cover;
   border-radius: 4px;
   margin-bottom: 1rem;
+}
+
+.details-section {
+  flex-grow: 1; /* Ovaj deo će rasti da popuni sav slobodan prostor */
 }
 
 h4 {
@@ -40,11 +46,3 @@ h4 b {
   justify-content: flex-end;
   gap: 10px;
 }
-
-.unavailable-tag {
-  color: #ffc107; /* Žuta boja za upozorenje */
-  font-weight: 700;
-  margin-top: 1rem;
-  text-align: right;
-}
-

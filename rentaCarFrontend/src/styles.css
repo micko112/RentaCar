@@ -1,17 +1,42 @@
-/* Globalni stilovi - primenjuju se na celu aplikaciju */
+/* --- GLOBALNI STILOVI (FINALNA VERZIJA) --- */
 
-/* Importuj fontove sa Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;700&display=swap');
+/* 1. Import fonta */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
+/* 2. Reset i osnovna podešavanja */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #121212;
+  font-family: 'Roboto', sans-serif;
+  background-color: #121212; /* Tamna pozadina */
+  color: #f0f0f0; /* SVETAO (skoro beo) tekst za celu aplikaciju */
 }
 
-/* Stilovi za forme koji će se primenjivati svuda */
+/* 3. Globalno resetovanje stilova za linkove */
+a {
+  font-size: 18px;
+  color: #fdfeff; /* Svetlo plava za linkove, da se razlikuju */
+  text-decoration: none; /* Ukloni podvlačenje SVUDA */
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: #a0d6fd; /* Svetlija plava pri hoveru */
+   /* Opciono: dodaj podvlačenje samo na hover */
+}
+
+/* 4. Globalni naslovi */
+h1, h2, h3 {
+  text-align: center;
+  color: #fafafa; /* Potpuno beli naslovi */
+}
+h4 {
+
+  color: #ffffff; /* Potpuno beli naslovi */
+}
+
+/* 5. Globalne forme (iste kao pre) */
 input[type="text"],
 input[type="password"],
 input[type="date"],
@@ -30,24 +55,28 @@ select {
   font-size: 1rem;
 }
 
+label {
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: block;
+  color: #f0f0f0; /* I labele su svetle */
+}
+
+/* 6. Globalna dugmad (ista kao pre) */
 .button, button {
   background-color: #007bff;
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
+  margin: 8px 5px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
   transition: background-color 0.3s;
+  text-transform: uppercase;
 }
 
 .button:hover, button:hover {
   background-color: #0056b3;
-}
-
-.button:disabled, button:disabled {
-  background-color: #555;
-  cursor: not-allowed;
 }

@@ -9,10 +9,10 @@
   background-position: center;
 }
 
-.login-container {
+.register-container {
   width: 400px;
   padding: 40px;
-  background: rgba(255, 255, 255, 0.9); /* Blago prozirna bela pozadina */
+  background: rgba(104, 104, 104, 0.5); /* Blago prozirna bela pozadina */
   border-radius: 25px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
   text-align: center;
@@ -30,8 +30,8 @@ h2 {
 
 label {
   font-weight: 600;
-  color: #0e1a35;
-  font-size: 14px;
+  color: #232323;
+  font-size: 16px;
   display: block;
   margin-bottom: 5px;
 }

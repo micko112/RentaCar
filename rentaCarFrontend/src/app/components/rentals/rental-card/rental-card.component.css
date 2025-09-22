@@ -1,7 +1,7 @@
 /* Čista verzija originalnog CSS-a */
 :host {
   display: block; /* Omogućava da se flexbox primeni na host element */
-  background: url("../../../assets/pet-card-bg2.png"); /* Tvoja pozadinska slika */
+  /*background: url("../../../");*/ /* Tvoja pozadinska slika */
   border: none;
   border-radius: 15px;
   background-size: cover;

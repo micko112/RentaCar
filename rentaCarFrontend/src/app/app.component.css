@@ -1,64 +1,88 @@
-/* GLOBALNI STILOVI */
+/* --- app.component.css --- */
 
-/* 1. Uvezi font koji koristiš svuda */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
-
-/* 2. Osnovni reset i podešavanje fonta */
-html, body {
-  font-family: "Poppins", sans-serif;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  /* Pozadinu definišemo po komponentama, ne globalno */
-}
-
-/* 3. Globalni stilovi za forme koje se ponavljaju */
-label {
-  font-weight: 600;
-  color: #0e1a35;
-  font-size: 14px;
-}
-
-input[type="text"],
-input[type="password"],
-input[type="date"],
-input[type="number"],
-textarea,
-select {
-  padding: 12px 15px;
-  border-radius: 15px;
-  border: 1px solid #ccc;
-  outline: none;
-  font-family: "Poppins", sans-serif;
-  font-size: 14px;
+/* Glavni kontejner za navigaciju */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  box-sizing: border-box; /* Važno da padding ne širi element */
-  transition: 0.3s;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  border-color: #82c0ff;
-  box-shadow: 0 0 8px rgba(130, 192, 255, 0.4);
-}
-
-/* 4. Globalni stil za dugmad */
-.button, button {
-  background-color: #184fa1;
-  color: #fff;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 20px;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 14px;
+  background-color: #191919;
+  z-index: 1000;
   font-family: "Poppins", sans-serif;
-  transition: 0.3s;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.button:hover, button:hover {
-  background-color: #194493;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+/* UL lista unutar navigacije */
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between; /* Ovo je ključ za raspored */
+  align-items: center;
+  height: 60px;
+}
+
+/* Divovi za grupisanje linkova */
+.nav-links, .login-section, .logout-section {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Mali razmak između linkova */
+}
+
+/* Svi linkovi unutar navigacije */
+.navbar ul li a {
+  display: block;
+  /* NAJVAŽNIJI DEO: Pojačavamo stil da uvek bude beo i bez podvlačenja */
+  color: white !important;
+  text-decoration: none !important;
+
+  padding: 0 16px;
+  line-height: 60px; /* Vertikalno centriranje teksta */
+  text-align: center;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Efekat pri prelasku mišem */
+.navbar ul li a:hover {
+  background-color: #0b326c;
+}
+
+/* Stilovi za dropdown meni */
+.dropdown {
+  position: relative;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 60px; /* Pojavljuje se tačno ispod glavnog linka */
+  left: 0;
+  background-color: #3c3c3c;
+  min-width: 160px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+.submenu li {
+  display: block; /* Linkovi su jedan ispod drugog */
+}
+
+.submenu li a {
+  line-height: 45px; /* Manja visina za dropdown linkove */
+  text-align: left;
+  padding: 0 16px;
+}
+
+.dropdown:hover .submenu {
+  display: block;
+}
+
+/* Kontejner za glavni sadržaj stranice */
+.page-wrapper {
+  padding-top: 60px; /* Ostavlja tačno onoliko prostora koliko je navigacija visoka */
 }
