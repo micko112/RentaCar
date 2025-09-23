@@ -52,7 +52,7 @@ export class UserService {
   }
 
   public setUserStatus() {
-    sessionStorage.setItem('currentUser', 'rentaCar');
+    sessionStorage.setItem('currentUser', 'admin');
   }
 
   public logOut() {

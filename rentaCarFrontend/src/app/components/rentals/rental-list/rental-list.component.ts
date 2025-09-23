@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Rental } from '../../../models/rental.model';
 import { RentalService } from '../../../services/rental.service';
 import { CarService } from '../../../services/car.service';
+import { UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-rental-list',
@@ -14,7 +15,8 @@ export class RentalListComponent implements OnInit {
 
   constructor(
     private rentalService: RentalService,
-    private carService: CarService
+    private carService: CarService,
+    public userService: UserService,
   ) {}
 
   ngOnInit() {

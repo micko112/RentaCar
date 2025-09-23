@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../models/client.model';
 import { ClientService } from '../../../services/client.service';
 import {ClientCardComponent} from '../client-card/client-card.component';
+import {UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-client-list',
@@ -13,7 +14,8 @@ export class ClientListComponent implements OnInit {
   public clients: Client[] = [];
   public filteredClients: Client[] = [];
 
-  constructor(private clientService: ClientService) {}
+  constructor(private clientService: ClientService,
+  public UserService: UserService,) {}
 
   ngOnInit() {
     this.clientService.getAll().subscribe({

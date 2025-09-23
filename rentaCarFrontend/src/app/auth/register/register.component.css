@@ -1,48 +1,65 @@
-/* Stilovi za Login komponente */
+/* --- Novi, moderniji stil za registraciju --- */
 :host {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh; /* Da zauzme ceo ekran */
-  background-image: url("../../../../public/register.png"); /* Tvoja pozadinska slika */
+  min-height: 100vh; /* Zauzima celu visinu ekrana */
+  padding: 2rem;
+  background-image: url('../../../../public/register.png'); /* Proveri da li je putanja tačna! */
   background-size: cover;
   background-position: center;
+  box-sizing: border-box;
 }
 
 .register-container {
-  width: 400px;
-  padding: 40px;
-  background: rgba(104, 104, 104, 0.5); /* Blago prozirna bela pozadina */
-  border-radius: 25px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 800px; /* Šira forma za dve kolone */
+  padding: 2.5rem;
+  background: #1f1f1f; /* Tamna pozadina forme */
+  border: 1px solid #333;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
   text-align: center;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  color: #ffffff;
 }
 
-h2 {
-  color: #194493;
-  margin-bottom: 30px;
+.register-form {
+  width: 100%;
 }
 
+/*
+  NAJVAŽNIJI DEO - Flexbox za redove
+  Svaki .form-row će sada biti jedan red sa dva polja.
+*/
+.form-row {
+  display: flex;
+  gap: 2rem; /* Razmak između kolona */
+  margin-bottom: 1rem;
+}
+
+/* Svaka .form-group je sada kolona unutar reda */
 .form-group {
-  margin-bottom: 20px;
-  text-align: left;
+  flex: 1; /* Obe kolone će zauzeti jednaku širinu */
 }
 
-label {
+.form-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+/* Link nasleđuje globalni stil, ali ga možemo pojačati */
+.login-link a {
   font-weight: 600;
-  color: #232323;
-  font-size: 16px;
-  display: block;
-  margin-bottom: 5px;
-}
-
-a {
-  display: block;
-  margin-top: 20px;
-  color: #184fa1;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
+  color: #007bff;
 }

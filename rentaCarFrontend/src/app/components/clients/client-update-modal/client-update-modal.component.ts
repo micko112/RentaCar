@@ -15,8 +15,8 @@ export class ClientUpdateModalComponent implements OnInit {
   @Output() saveClient = new EventEmitter<Client>();
   @Output() closeModal = new EventEmitter<void>();
 
-  tempClient!: Client;
-  cities: City[] = [];
+  public tempClient!: Client;
+  public cities: City[] = [];
 
   constructor(private cityService: CityService) {}
 

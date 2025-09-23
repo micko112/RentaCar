@@ -1,6 +1,12 @@
 <div class="page-container">
   <div class="content-container">
-    <h1>Naša Ponuda Vozila</h1>
+    <div class="page-header">
+      <h1>Naša Ponuda Vozila</h1>
+      <!-- Dugme vidljivo samo adminu, vodi na /cars/add rutu -->
+      <button *ngIf="userService.getUserStatus() === 'admin'" routerLink="/cars/add" class="button add-button">
+        + Dodaj Novo Vozilo
+      </button>
+    </div>
 
     <div class="search-bar">
       <input

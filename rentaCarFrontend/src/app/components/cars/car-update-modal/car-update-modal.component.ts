@@ -15,10 +15,12 @@ export class CarUpdateModalComponent implements OnInit {
   @Output() saveCar = new EventEmitter<Car>();
   @Output() closeModal = new EventEmitter<void>();
 
-  tempCar!: Car;
-  carModels: CarModel[] = [];
+  public tempCar!: Car;
+  public carModels: CarModel[] = [];
 
-  constructor(private carModelService: CarModelService) {}
+  constructor(
+    private carModelService: CarModelService
+  ) {}
 
   ngOnInit() {
     // Kreiramo kopiju da ne bismo menjali original dok se ne klikne 'Save'

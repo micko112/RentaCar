@@ -19,6 +19,7 @@ import { ClientListComponent } from './components/clients/client-list/client-lis
 import { ClientCardComponent } from './components/clients/client-card/client-card.component';
 import { ClientAddComponent } from './components/clients/client-add/client-add.component';
 import { ClientUpdateModalComponent } from './components/clients/client-update-modal/client-update-modal.component';
+import { RentalModalComponent } from './components/rentals/rental-modal/rental-modal.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ClientUpdateModalComponent } from './components/clients/client-update-m
     ClientListComponent,
     ClientCardComponent,
     ClientAddComponent,
-    ClientUpdateModalComponent
+    ClientUpdateModalComponent,
+    RentalModalComponent
   ],
   imports: [
     BrowserModule,

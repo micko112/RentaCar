@@ -23,8 +23,8 @@ export class RentalAddComponent implements OnInit {
   constructor(
     private rentalService: RentalService,
     private carService: CarService,
-    private clientService: ClientService,
-    private userService: UserService,
+    public clientService: ClientService,
+    public userService: UserService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {

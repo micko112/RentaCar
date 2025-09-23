@@ -22,10 +22,14 @@
 .info-section h4 {
   margin: 6px 0;
   font-weight: 600;
-  color: #194493;
+  color: #e8e8e8;
   font-size: 17px;
 }
-
+h4 b {
+  color: #47a7ff;
+  min-width: 100px;
+  display: inline-block;
+}
 .status-section {
   margin-top: 1rem;
 }

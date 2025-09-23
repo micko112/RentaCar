@@ -1,5 +1,10 @@
 <div class="page-container">
-  <h1>Potvrđena Iznajmljivanja</h1>
+  <div class="page-header">
+    <h1>Potvrđeni Ugovori</h1>
+    <button *ngIf="userService.getUserStatus() === 'admin'" routerLink="/rentals/add" class="button add-button">
+      + Kreiraj Novi Ugovor
+    </button>
+  </div>
   <div *ngIf="!rentals || rentals.length === 0" class="no-items-message">
     Nema potvrđenih iznajmljivanja.
   </div>

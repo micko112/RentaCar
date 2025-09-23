@@ -6,6 +6,7 @@ import { UserService } from '../../../services/user.service';
 import { ClientService } from '../../../services/client.service';
 import { RentalService } from '../../../services/rental.service';
 import {CarUpdateModalComponent} from '../car-update-modal/car-update-modal.component';
+import {RentalDateSelection} from '../../rentals/rental-modal/rental-modal.component';
 
 @Component({
   selector: 'app-car-card',
@@ -17,6 +18,7 @@ export class CarCardComponent {
   @Input() car!: Car;
   @Output() removedCar = new EventEmitter<Car>();
 
+  showRentalModal = false;
   edit: boolean = false;
 
   constructor(
@@ -25,7 +27,34 @@ export class CarCardComponent {
     private carService: CarService,
     public rentalService: RentalService
   ) {}
+  openRentalModal() {
+    console.log('Dugme "Iznajmi" je kliknuto!');
+    this.showRentalModal = true;
+  }
+  closeModal() {
+    this.showRentalModal = false;
+  }
+  handleDateSelection(selection: RentalDateSelection) {
+    const rental = new Rental();
+    rental.status = 0; // Pending request
+    rental.client = this.clientService.getSpecificClient();
+    rental.car = this.car; // 'this.car' je @Input ove komponente
 
+    // Koristimo datume iz modala
+    rental.startDate = selection.startDate;
+    rental.endDate = selection.endDate;
+    rental.notes = 'Zahtev poslat online.';
+
+    this.rentalService.addNewRental(rental).subscribe({
+      next: (res) => {
+        alert('Zahtev za iznajmljivanje je uspešno poslat!');
+        this.closeModal(); // Zatvori modal nakon uspešnog slanja
+      },
+      error: (err) => {
+        alert('Slanje zahteva nije uspelo!');
+      },
+    });
+  }
   onSave(updatedCar: Car) {
     this.carService.updateCar(updatedCar).subscribe({
       next: (res) => {

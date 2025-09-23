@@ -14,6 +14,11 @@
 }
 
 .modal-content {
+  background-color: rgb(44, 44, 44);
+  margin-top: 70px;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: #5a5a5a;
   padding: 2rem;
   width: 100%;
   max-width: 500px; /* Može biti i širi od kartice */

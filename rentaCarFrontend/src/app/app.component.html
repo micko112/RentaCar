@@ -1,29 +1,14 @@
 <!-- NAVIGACIJA ZA ADMINA / RADNIKA -->
-<div class="navbar" *ngIf="userService.getUserStatus() == 'admin'">
+<div class="navbar" *ngIf="userService.getUserStatus() === 'admin'">
   <ul>
     <div class="nav-links">
-      <li class="dropdown">
-        <a routerLink="/cars">Vozila</a>
-        <ul class="submenu">
-          <li><a routerLink="/cars/add">Dodaj Vozilo</a></li>
-        </ul>
-      </li>
-      <li class="dropdown">
-        <a routerLink="/rentals">Ugovori</a>
-        <ul class="submenu">
-          <li><a routerLink="/rentals/add">Kreiraj Ugovor</a></li>
-        </ul>
-      </li>
-      <li class="dropdown">
-        <a routerLink="/clients">Klijenti</a>
-        <ul class="submenu">
-          <li><a routerLink="/clients/add">Dodaj Klijenta</a></li>
-        </ul>
-      </li>
+      <li><a routerLink="/cars">Vozila</a></li>
+      <li><a routerLink="/clients">Klijenti</a></li>
+      <li><a routerLink="/rentals">Ugovori</a></li>
       <li><a routerLink="/rentals/requests">Zahtevi</a></li>
     </div>
     <div class="logout-section">
-      <a routerLink="/login" (click)="logout()">Odjava</a>
+      <a (click)="logout()">Odjava</a>
     </div>
   </ul>
 </div>

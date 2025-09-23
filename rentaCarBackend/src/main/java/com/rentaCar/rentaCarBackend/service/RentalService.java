@@ -8,7 +8,10 @@ import com.rentaCar.rentaCarBackend.dto.ClientDTO;
 import  com.rentaCar.rentaCarBackend.dto.RentalDTO;
 import  com.rentaCar.rentaCarBackend.mapper.ClientMapper;
 import  com.rentaCar.rentaCarBackend.mapper.RentalMapper;
+import com.rentaCar.rentaCarBackend.model.Car;
+import com.rentaCar.rentaCarBackend.model.Client;
 import  com.rentaCar.rentaCarBackend.model.Rental;
+import com.rentaCar.rentaCarBackend.model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -94,12 +97,47 @@ public class RentalService {
                 return rentalMapper.toDomainDTO(rental); // Značajno pojednostavljeno
         }
 
+        @Transactional // Važno je da metoda bude transakciona
         public String updateRental(RentalDTO rentalDTO) {
                 try {
-                        // Logika je ista kao za dodavanje, jer save() radi i update ako ID postoji
-                        addRental(rentalDTO);
+                        // 1. Pronađi postojeći rental u bazi po ID-u
+                        Rental rentalIzBaze = rentalRepository.findById(rentalDTO.getRentalId())
+                                .orElseThrow(() -> new RuntimeException("Rental with ID " + rentalDTO.getRentalId() + " not found."));
+
+                        // 2. Pronađi povezane entitete
+                        Car carIzBaze = carRepository.findById(rentalDTO.getCar().getId())
+                                .orElseThrow(() -> new RuntimeException("Car not found."));
+
+                        Client clientIzBaze = clientRepository.findById(rentalDTO.getClient().getJmbg())
+                                .orElseThrow(() -> new RuntimeException("Client not found."));
+
+                        User userIzBaze = null;
+                        if (rentalDTO.getUser() != null) {
+                                userIzBaze = userRepository.findById(rentalDTO.getUser().getId())
+                                        .orElseThrow(() -> new RuntimeException("User not found."));
+                        }
+
+                        // 3. Ažuriraj samo polja koja se menjaju na postojećem entitetu
+                        rentalIzBaze.setStatus(rentalDTO.getStatus());
+                        rentalIzBaze.setNotes(rentalDTO.getNotes());
+                        rentalIzBaze.setStartDate(rentalDTO.getStartDate());
+                        rentalIzBaze.setEndDate(rentalDTO.getEndDate());
+
+                        // Postavi veze, ne kreiraj nove objekte
+                        rentalIzBaze.setCar(carIzBaze);
+                        rentalIzBaze.setClient(clientIzBaze);
+                        rentalIzBaze.setUser(userIzBaze);
+
+                        // 4. Sačuvaj izmenjeni entitet. Pošto je metoda transakciona,
+                        // čak i bez eksplicitnog save(), promene bi trebalo da budu sačuvane.
+                        // Ali radi sigurnosti, pozvaćemo save().
+                        rentalRepository.save(rentalIzBaze);
+
                         return "Updated the rental successfully!";
+
                 } catch (Exception ex) {
+                        // Loguj grešku radi lakšeg debagovanja
+                        // logger.error("Error updating rental: ", ex);
                         return "Cannot update this rental!";
                 }
         }
