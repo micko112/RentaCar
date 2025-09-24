@@ -32,9 +32,10 @@ h2 {
 }
 
 label {
+
   font-weight: 600;
-  color: #0e1a35;
-  font-size: 14px;
+  color: #060b19;
+  font-size: 18px;
   display: block;
   margin-bottom: 5px;
 }
@@ -45,7 +46,7 @@ a {
   color: #184fa1;
   text-decoration: none;
 }
-
+html, body
 a:hover {
   text-decoration: underline;
 }

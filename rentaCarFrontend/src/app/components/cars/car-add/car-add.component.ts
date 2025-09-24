@@ -28,7 +28,7 @@ export class CarAddComponent implements OnInit {
       year: new FormControl('', [Validators.required, Validators.pattern(/^\d{4}$/)]),
       carModel: new FormControl(null, Validators.required),
       notes: new FormControl(''),
-      picture: new FormControl('', [Validators.required, Validators.pattern(/^(https?:\/\/.*)$/)]),
+      picture: new FormControl('', [Validators.required]),
     });
   }
 

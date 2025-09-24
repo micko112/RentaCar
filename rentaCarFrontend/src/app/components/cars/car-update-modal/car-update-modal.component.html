@@ -1,50 +1,57 @@
-<div class="modal-backdrop">
-  <div class="modal-content">
+<!-- Koristimo .modal-backdrop kao pozadinu koja prekriva samo karticu -->
+<div class="modal-backdrop" (click)="cancel()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
     <h2>Izmena Podataka o Vozilu</h2>
 
+    <!-- Koristimo istu .form-grid strukturu kao za dodavanje -->
     <div class="form-grid">
+
+      <!-- LEVA KOLONA -->
       <div class="form-column">
-        <label>
-          Registarska oznaka:
+        <div class="form-group">
+          <label>Registarska oznaka:</label>
           <input type="text" [(ngModel)]="tempCar.licensePlate" />
-        </label>
+        </div>
 
-        <label>
-          Godište:
+        <div class="form-group">
+          <label>Godište:</label>
           <input type="number" [(ngModel)]="tempCar.year" />
-        </label>
+        </div>
 
-        <label>
-          Menjač:
+        <div class="form-group">
+          <label>Menjač:</label>
           <input type="text" [(ngModel)]="tempCar.transmission" />
-        </label>
+        </div>
       </div>
 
+      <!-- DESNA KOLONA -->
       <div class="form-column">
-        <label>
-          Model vozila:
+        <div class="form-group">
+          <label>Model vozila:</label>
           <select [(ngModel)]="tempCar.carModel">
             <option *ngFor="let model of carModels" [ngValue]="model">
               {{ model.name }}
             </option>
           </select>
-        </label>
+        </div>
 
-        <label>
-          Napomene:
+        <div class="form-group">
+          <label>Napomene:</label>
           <input type="text" [(ngModel)]="tempCar.notes" />
-        </label>
+        </div>
 
-        <label>
-          URL Slike:
+        <div class="form-group">
+          <label>URL Slike:</label>
           <input type="text" [(ngModel)]="tempCar.picture" />
-        </label>
+        </div>
       </div>
+
     </div>
 
+    <!-- DUGMAD -->
     <div class="modal-buttons">
-      <button (click)="save()">Sačuvaj</button>
-      <button (click)="cancel()">Otkaži</button>
+      <button class="button" (click)="save()">Sačuvaj</button>
+      <button class="button button-secondary" (click)="cancel()">Otkaži</button>
     </div>
   </div>
 </div>
