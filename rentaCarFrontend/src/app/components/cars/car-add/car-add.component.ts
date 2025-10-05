@@ -29,6 +29,7 @@ export class CarAddComponent implements OnInit {
       carModel: new FormControl(null, Validators.required),
       notes: new FormControl(''),
       picture: new FormControl('', [Validators.required]),
+      pricePerDay: new FormControl('', [Validators.required]),
     });
   }
 
@@ -53,6 +54,7 @@ export class CarAddComponent implements OnInit {
     car.notes = this.newCarForm.get('notes')!.value || '';
     car.picture = this.newCarForm.get('picture')!.value;
     car.status = 1; // 1 = Available
+    car.pricePerDay =  this.newCarForm.get('pricePerDay')!.value;
 
     // Dodeljujemo ceo objekat modela
     car.carModel = this.newCarForm.get('carModel')!.value;

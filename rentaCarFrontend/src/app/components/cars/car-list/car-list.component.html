@@ -8,15 +8,35 @@
       </button>
     </div>
 
-    <div class="search-bar">
-      <input
-        (input)="onSearch(search.value)"
-        type="text"
-        placeholder="Pretraži po registarskoj oznaci"
-        #search
-        class="search-input"
-      />
-    </div>
+    <form [formGroup]="searchForm" (ngSubmit)="performSearch()" class="simplified-form">
+
+      <!-- Локација преузимања -->
+      <select formControlName="pickupLocation" class="form-field">
+        <option [ngValue]="null" disabled>Локација преузимања</option>
+        <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+      </select>
+
+      <!-- Датум преузимања -->
+      <input type="date" formControlName="pickupDate" class="form-field">
+
+      <!-- ВРЕМЕ ПРЕУЗИМАЊА - ДОДАЈ ОВО -->
+      <input type="time" formControlName="pickupTime" class="form-field">
+
+      <!-- Локација враћања -->
+      <select formControlName="dropoffLocation" class="form-field">
+        <option [ngValue]="null" disabled>Локација враћања</option>
+        <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+      </select>
+
+      <!-- Датум враћања -->
+      <input type="date" formControlName="dropoffDate" class="form-field">
+
+      <!-- ВРЕМЕ ВРАЋАЊА - ДОДАЈ ОВО -->
+      <input type="time" formControlName="dropoffTime" class="form-field">
+
+      <!-- Дугме -->
+      <button type="submit" class="search-button">Претражи</button>
+    </form>
 
     <div class="card-grid">
       <app-car-card

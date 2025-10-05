@@ -9,4 +9,5 @@ export class Car {
   public notes!: string;
   public transmission!: string;
   public picture!: string;
+  public pricePerDay!: number;
 }

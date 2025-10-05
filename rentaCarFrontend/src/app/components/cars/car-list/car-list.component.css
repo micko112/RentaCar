@@ -8,7 +8,27 @@
   padding: 2rem;
 }
 
+.form-field {
+  flex: 1;
+  min-width: 180px; /* Minimalna širina polja */
+}
 
+.form-field label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/*
+  MENJAMO .card-grid U .card-list
+  Ovo će poređati kartice jednu ispod druge.
+*/
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Razmak između kartica */
+}
 
 .search-bar {
   display: flex;
@@ -25,10 +45,4 @@
   NAJVAŽNIJI DEO - GRID RASPORED
   Koristimo CSS Grid jer je moderniji i moćniji od Flexbox-a za ovakve stvari.
 */
-.card-grid {
-  display: grid;
-  /* Kreira kolone koje su minimalno 300px, a maksimalno 1fr (jedan deo slobodnog prostora).
-     auto-fill će automatski dodati onoliko kolona koliko stane. */
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem; /* Razmak između kartica */
-}
+

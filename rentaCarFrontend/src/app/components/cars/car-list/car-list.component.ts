@@ -3,6 +3,7 @@ import { CarService } from '../../../services/car.service';
 import { Car } from '../../../models/car.model';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-car-list',
@@ -14,13 +15,25 @@ export class CarListComponent implements OnInit {
   public cars: Car[] = [];
   public filteredCars: Car[] = [];
 
+
+  public locations: string[] = ["Galerija", "Aerodrom", "Arena"];
+  protected searchForm!: FormGroup;
   constructor(
     private carService: CarService,
     private router: Router,
+    private formBuilder: FormBuilder,
   public userService: UserService) {}
 
 
   ngOnInit() {
+    this.searchForm = this.formBuilder.group({
+      pickupLocation: [null],
+      pickupDate: [''],
+      pickupTime: [''],
+      dropoffLocation: [null],
+      dropoffDate: [''],
+      dropoffTime: ['']
+    })
     this.carService.getAll().subscribe({
       next: (response) => {
         this.cars = response.data.values as Car[];
@@ -44,7 +57,10 @@ export class CarListComponent implements OnInit {
       },
     });
   }
-
+  performSearch() {
+    console.log("Подаци из форме:", this.searchForm.value);
+    alert("Претрага још увек није имплементирана.");
+  }
   onSearch(search: string) {
     if (!search) {
       this.filteredCars = this.cars;
