@@ -1,44 +1,36 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Car } from '../../../models/car.model';
-
-// Definišemo interfejs za podatke koje vraćamo
-export interface RentalDateSelection {
-  startDate: Date;
-  endDate: Date;
-}
+import { Component, EventEmitter, Input, Output, HostListener } from '@angular/core';
+import { Car } from '../../../models/car';
 
 @Component({
   selector: 'app-rental-modal',
-  standalone: false,
   templateUrl: './rental-modal.component.html',
+  standalone: false,
   styleUrls: ['./rental-modal.component.css']
 })
-export class RentalModalComponent implements OnInit {
-  @Input() car!: Car; // Prima podatke o autu koji se iznajmljuje
+export class RentalModalComponent {
+  // Data the component receives from the outside
+  @Input() car!: Car;
+  @Input() totalPrice: number = 0;
+  @Input() numberOfDays: number = 0;
+
+  // Events the component sends back to the parent
   @Output() closeModal = new EventEmitter<void>();
-  @Output() datesSelected = new EventEmitter<RentalDateSelection>();
+  @Output() confirmRental = new EventEmitter<void>();
 
-  rentalForm!: FormGroup;
+  constructor() {}
 
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    this.rentalForm = this.fb.group({
-      startDate: ['', Validators.required],
-      endDate: ['', Validators.required]
-    });
+  // HostListener to close the modal by clicking on the backdrop
+  @HostListener('click')
+  onBackdropClick() {
+    this.closeModal.emit();
   }
 
-  submitRequest() {
-    if (this.rentalForm.invalid) {
-      alert('Oba datuma su obavezna.');
-      return;
-    }
-    // Vraćamo odabrane datume roditeljskoj komponenti
-    this.datesSelected.emit(this.rentalForm.value);
+  // Method called by the "Confirm" button
+  confirm() {
+    this.confirmRental.emit();
   }
 
+  // Method called by the "Cancel" button
   cancel() {
     this.closeModal.emit();
   }

@@ -1,44 +1,91 @@
-<div class="card-container">
-  <div class="info-section">
-    <img [src]="car.picture" alt="Slika vozila" class="vehicle-picture" />
+<div class="car-card-container" [class.expanded]="isDetailsVisible">
 
-    <div class="details-section">
-      <h4><b>Model: </b> {{ car.carModel.name }}</h4>
-      <h4><b>Godište:</b> {{ car.year }}</h4>
-      <h4><b>Registracija:</b> {{ car.licensePlate }}</h4>
-      <h4><b>Menjač:</b> {{ car.transmission }}</h4>
-      <h4><b>Napomene:</b> {{ car.notes }}</h4>
+  <!-- TOP PART OF THE CARD -->
+  <div class="card-main-content">
+
+    <!-- Left side: Info -->
+    <div class="info-section">
+      <div class="make-logo">
+        <img [src]="car.carModel.logoUrl" alt="{{ car.carModel.make }}">
+        <span>{{ car.carModel.make }}</span>
+      </div>
+      <h2>{{ car.carModel.name }} <span class="engine">{{ car.carModel.engineDescription }}</span></h2>
+
+      <div class="specs">
+        <span><i class="fas fa-user-friends"></i> {{ car.carModel.seats }} SEDIŠTA </span>
+        <span><i class="fas fa-cogs"></i> {{ car.carModel.transmission }}</span>
+        <span><i class="fas fa-gas-pump"></i> {{ car.carModel.fuelType }}</span>
+      </div>
+
+      <div class="category-tag">{{ car.carModel.category }}</div>
     </div>
 
-    <!-- Dugmad za ADMINA (radnika) -->
-    <div class="action-buttons" *ngIf="userService.getUserStatus() === 'admin'">
-      <button class="button" (click)="update()">Izmeni</button>
-      <button class="button" (click)="delete(car)">Obriši</button>
+    <!-- Middle part: Image -->
+    <div class="image-section">
+      <img [src]="car.carModel.pictureUrl" alt="{{ car.carModel.name }}">
     </div>
 
-    <!-- Dugme za KLIJENTA (ako je auto dostupan) -->
-    <div class="action-buttons" *ngIf="clientService.getUserStatus() == 'user' && car.status == 1">
-      <button class="button" (click)="openRentalModal()">Iznajmi</button>
-    </div>
-    <app-rental-modal
-      *ngIf="showRentalModal"
-      [car]="car"
-      (closeModal)="closeModal()"
-      (datesSelected)="handleDateSelection($event)"
-    ></app-rental-modal>
+    <!-- Right side: Price -->
+    <div class="price-section">
+      <div class="price-wrapper">
+        <div class="booking-button-wrapper">
+          <button class="button" (click)="requestRental()">REZERVIŠI</button>
+        </div>
+        <div class = "price-info">
+          <ng-container *ngIf="numberOfDays > 0; else fromPrice">
+            <span class="total-price">{{ totalPrice.toFixed(2) }}€</span>
+            <span class="price-details">for {{ numberOfDays }} {{ numberOfDays === 1 ? 'day' : 'days' }}</span>
+            <span class="price-details">{{ pricePerDay.toFixed(2) }}€ /day</span>
+          </ng-container>
+          </div>
+        <div class = "show-more">
+          <ng-template #fromPrice>
+            <span class="from-text">Od  </span>
+            <span class="price">{{ car.carModel.priceTier46plus }}€<span class="per-day">  /dan</span></span>
+          </ng-template>
+        </div>
 
-    <!-- Poruka ako auto nije dostupan -->
-    <div class="unavailable-tag" *ngIf="clientService.getUserStatus() == 'user' && car.status != 1">
-      <span>Nije dostupno</span>
+      </div>
+      <!-- CORRECTION: (click) event is now here -->
+      <button type="button" class="details-toggle" (click)="toggleDetails()">
+        {{ isDetailsVisible ? 'SAKRIJ' : 'PRIKAži' }}
+        <i class="fas" [class.fa-chevron-up]="isDetailsVisible" [class.fa-chevron-down]="!isDetailsVisible"></i>
+      </button>
     </div>
   </div>
 
+  <!-- BOTTOM PART OF THE CARD (hidden) -->
+  <div class="card-details-content" *ngIf="isDetailsVisible">
+    <div class="extra-specs">
+      <span><i class="fas fa-door-closed"></i> {{ car.carModel.doors }} VRATA</span>
+      <span><i class="fas fa-briefcase"></i> {{ car.carModel.luggageCapacity }} KOFERA</span>
+      <span *ngIf="car.carModel.hasAc"><i class="fas fa-snowflake"></i> A/C</span>
+    </div>
+    <div class="pricing-table">
+      <div class="pricing-header">
+        <span>Dani</span><span>1-3</span><span>4-7</span><span>8-15</span><span>16-30</span><span>31-45</span><span>46+</span>
+      </div>
+      <div class="pricing-row">
+        <span>Cena / dan</span>
+        <span>{{ car.carModel.priceTier1to3 }}€</span>
+        <span>{{ car.carModel.priceTier4to7 }}€</span>
+        <span>{{ car.carModel.priceTier8to15 }}€</span>
+        <span>{{ car.carModel.priceTier16to30 }}€</span>
+        <span>{{ car.carModel.priceTier31to45 }}€</span>
+        <span>{{ car.carModel.priceTier46plus }}€</span>
+      </div>
+    </div>
+  </div>
 
-  <!-- Modal za izmenu se pojavljuje ovde ako je 'edit' true -->
-  <app-car-update-modal
-    *ngIf="edit"
-    [car]="car"
-    (saveCar)="onSave($event)"
-    (closeModal)="edit = false"
-  ></app-car-update-modal>
 </div>
+
+<!-- Rental Modal - CORRECTED -->
+<app-rental-modal
+  *ngIf="showRentalModal"
+  [car]="car"
+  [totalPrice]="totalPrice"
+  [numberOfDays]="numberOfDays"
+
+  (closeModal)="closeModal()"
+  (confirmRental)="handleRentalConfirmation()">
+</app-rental-modal>

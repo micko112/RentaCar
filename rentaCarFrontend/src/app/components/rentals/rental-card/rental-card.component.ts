@@ -4,15 +4,15 @@ import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-rental-card',
-  standalone: false,
   templateUrl: './rental-card.component.html',
+  standalone: false,
   styleUrls: ['./rental-card.component.css']
 })
 export class RentalCardComponent {
   // viewContext može biti: 'admin-list', 'admin-requests', 'client-requests'
   @Input() viewContext: string = 'admin-list';
   @Input() rental!: Rental;
-
+  @Input() totalPrice: number = 0;
   @Output() acceptedRental = new EventEmitter<Rental>();
   @Output() removedRental = new EventEmitter<Rental>();
   @Output() declinedRental = new EventEmitter<Rental>();

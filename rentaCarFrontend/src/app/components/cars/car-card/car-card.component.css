@@ -1,48 +1,104 @@
-/* --- Stil za pojedinačnu karticu --- */
-:host {
-  display: flex; /* Omogućava da se sadržaj unutar kartice lepo rasporedi */
-  flex-direction: column; /* Sadržaj ide jedan ispod drugog */
+:host { display: block; }
+
+.car-card-container {
   background-color: #1f1f1f;
-  border: 1px solid #333;
   border-radius: 8px;
-  padding: 1.5rem;
-  transition: transform 0.3s, box-shadow 0.3s;
-  position: relative;
-  /* NEMA VIŠE FIKSNE ŠIRINE (width) - ona dolazi iz grida */
+  border: 1px solid #333;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
-:host(:hover) {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+.car-card-container.expanded {
+  border-color: #007bff;
+  box-shadow: 0 5px 25px rgba(0, 123, 255, 0.1);
 }
 
-.vehicle-picture {
-  width: 100%;
-  height: 180px; /* Može ostati fiksna visina za uniformnost */
-  object-fit: cover;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-}
+.card-main-content { display: flex; flex-wrap: wrap; align-items: center; padding: 1.5rem; gap: 1rem; }
 
-.details-section {
-  flex-grow: 1; /* Ovaj deo će rasti da popuni sav slobodan prostor */
-}
+/* Left side: Info */
+.info-section { flex: 1.5; min-width: 250px; }
+.make-logo { display: flex; align-items: center; gap: 0.75rem; color: #aaa; }
+.make-logo img { height: 40px; width: 40px; object-fit: contain; }
+.info-section h2 { margin: 0.5rem 0; font-size: 2.2rem; color: #fff; line-height: 1.1; }
+.info-section .engine { font-size: 1.5rem; font-weight: 400; color: #bbb; }
+.specs { display: flex; flex-direction: column; gap: 0.5rem; color: #aaa; margin: 1rem 0; }
+.specs span { display: flex; align-items: center; gap: 0.75rem; }
+.specs span i { width: 20px; text-align: center; }
+.category-tag { background: #333; color: #aaa; padding: 5px 10px; border-radius: 4px; display: inline-block; font-size: 0.8rem; }
 
-h4 {
-  margin: 0.5rem 0;
-  color: #e0e0e0;
-  font-size: 1rem;
-}
+/* Middle part: Image */
+.image-section { flex: 2; text-align: center; min-width: 300px; }
+.image-section img { max-width: 100%; height: auto; }
 
-h4 b {
-  color: #007bff;
-  min-width: 100px;
-  display: inline-block;
-}
-
-.action-buttons {
-  margin-top: 1rem;
+/* Right side: Price */
+.price-section {
+  flex: 1;
   display: flex;
-  justify-content: flex-end;
-  gap: 10px;
+  text-align: center;
+  min-width: 180px;
+}
+.price-wrapper {
+  display: flex;
+  flex-direction: column; /* Postavljamo elemente jedan ispod drugog */
+  align-items: center;   /* Centriramo ih horizontalno */
+  justify-content: center; /* Centriramo ih vertikalno */
+  gap: 1rem; /* Pravimo razmak između cene i dugmeta */
+}
+.price-wrapper .from-text {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+.price-wrapper .price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+.price-wrapper .per-day {
+  font-size: 1rem;
+  color: #aaa;
+}
+.price-wrapper .total-price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #90EE90;
+  display: block;
+}
+.price-wrapper .price-details { font-size: 0.9rem;
+  color: #aaa;
+  display: block;
+}
+.details-toggle { background: none; border: none; color: #888; cursor: pointer; margin-top: 0.5rem; font-size: 0.9rem; }
+.details-toggle i { margin-left: 0.5rem; }
+
+/* Bottom part: Details */
+.card-details-content { background-color: #2a2a2a; border-top: 1px solid #333; padding: 1.5rem; display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; }
+.extra-specs { flex: 1; display: flex; gap: 1.5rem; color: #aaa; }
+.extra-specs span { display: flex; align-items: center; gap: 0.75rem; }
+.pricing-table { flex: 2.5; color: #aaa; min-width: 400px; }
+.pricing-header, .pricing-row { display: grid; grid-template-columns: 2fr repeat(6, 1fr); text-align: center; padding: 0.5rem 0; }
+.pricing-row { color: #fff; font-weight: 700; border-top: 1px solid #444; }
+.booking-button-wrapper { flex: 1; text-align: right; min-width: 150px; }
+.booking-button-wrapper .button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.booking-button-wrapper .button:hover {
+  background-color: #0056b3;
+}
+
+
+/* Responsiveness */
+@media (max-width: 992px) {
+  .card-main-content, .card-details-content { flex-direction: column; text-align: center; }
+  .info-section, .price-section { text-align: center; }
+  .specs, .extra-specs { justify-content: center; flex-direction: row; }
+  .pricing-table { min-width: 100%; }
+  .booking-button-wrapper { text-align: center; margin-top: 1rem; }
 }

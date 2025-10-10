@@ -12,6 +12,7 @@
         *ngFor="let r of pendingRentals"
         [rental]="r"
         [viewContext]="'admin-requests'"
+
         (declinedRental)="decline(r)"
         (acceptedRental)="accept(r)"
       ></app-rental-card>

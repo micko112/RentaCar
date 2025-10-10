@@ -27,9 +27,12 @@
 .nav-links, .login-section, .logout-section {
   display: flex;
   align-items: center;
-  gap: 10px; /* Mali razmak između linkova */
+  gap: 15px; /* Mali razmak između linkova */
 }
-
+.gap{
+  border: 1px solid #3c3c3c;
+  height:  25px;
+}
 /* Svi linkovi unutar navigacije */
 .navbar ul li a {
   display: block;

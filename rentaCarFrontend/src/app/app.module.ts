@@ -20,6 +20,8 @@ import { ClientCardComponent } from './components/clients/client-card/client-car
 import { ClientAddComponent } from './components/clients/client-add/client-add.component';
 import { ClientUpdateModalComponent } from './components/clients/client-update-modal/client-update-modal.component';
 import { RentalModalComponent } from './components/rentals/rental-modal/rental-modal.component';
+import { CarModelAddComponent } from './components/cars/car-model-add/car-model-add.component';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -28,8 +30,8 @@ import { RentalModalComponent } from './components/rentals/rental-modal/rental-m
     LoginClientComponent,
     RegisterComponent,
     CarListComponent,
-    CarCardComponent,
     CarAddComponent,
+    CarCardComponent,
     CarUpdateModalComponent,
     RentalListComponent,
     RentalCardComponent,
@@ -39,17 +41,23 @@ import { RentalModalComponent } from './components/rentals/rental-modal/rental-m
     ClientCardComponent,
     ClientAddComponent,
     ClientUpdateModalComponent,
-    RentalModalComponent
+    RentalModalComponent,
+    CarModelAddComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    CommonModule,
+    ReactiveFormsModule,
+
   ],
   providers: [
     provideClientHydration(withEventReplay())
+  ],
+  exports: [
+
   ],
   bootstrap: [AppComponent]
 })

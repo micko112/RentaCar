@@ -42,25 +42,25 @@ public class ClientService {
     public String addClient(ClientDTO clientDTO) {
         try {
             if (clientRepository.existsById(clientDTO.getJmbg())) {
-                return "This client already has an account!";
+                return "Ovaj klijent već ima nalog!";
             } else {
                 Client client = clientMapper.toDomainEntity(clientDTO);
                 // Ručno postavljanje grada iz baze
                 cityRepository.findById(clientDTO.getCity().getId()).ifPresent(client::setCity);
                 clientRepository.save(client);
-                return "Account created successfully!";
+                return "Nalog je uspešno kreiran!";
             }
         } catch (Exception ex) {
-            return "Error while creating account!";
+            return "Greška tokom kreiranja naloga!";
         }
     }
 
     public String deleteClient(String clientId) {
         try {
             clientRepository.deleteById(clientId);
-            return "Deleted the client successfully!";
+            return "Klijent je obrisan uspešno!";
         } catch (Exception ex) {
-            return "Cannot delete this client!";
+            return "Sistem ne može da obriše klijenta!";
         }
     }
 
@@ -75,9 +75,9 @@ public class ClientService {
             // Ručno postavljanje grada iz baze
             cityRepository.findById(clientDTO.getCity().getId()).ifPresent(client::setCity);
             clientRepository.save(client);
-            return "Updated the client successfully!";
+            return "Klijent je ažuriran uspešno!";
         } catch (Exception ex) {
-            return "Cannot update this client!";
+            return "Sistem ne može da ažurira klijenta!";
         }
     }
 
@@ -85,11 +85,11 @@ public class ClientService {
         try {
             Client client = clientRepository.findByUsername(username);
             if (client != null && client.getPassword().equals(password)) {
-                return "Hello, " + client.getName() + " " + client.getSurname() + "!";
+                return "Dobrodošli, " + client.getName() + " " + client.getSurname() + "!";
             }
         } catch (Exception ex) {
-            return "Invalid username or password!";
+            return "Pogrešno korisnicko ime ili prezime!";
         }
-        return "Invalid username or password!";
+        return "Pogrešno korisnicko ime ili prezime!";
     }
 }

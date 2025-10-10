@@ -1,49 +1,84 @@
-<div class="page-container">
-  <div class="content-container">
-    <div class="page-header">
-      <h1>Naša Ponuda Vozila</h1>
-      <!-- Dugme vidljivo samo adminu, vodi na /cars/add rutu -->
-      <button *ngIf="userService.getUserStatus() === 'admin'" routerLink="/cars/add" class="button add-button">
-        + Dodaj Novo Vozilo
+<div class="search-hero-container">
+  <div class="search-content">
+    <h1>RENT A CAR IN BELGRADE</h1>
+    <h2>CHOOSE LOCATIONS AND DATES</h2>
+
+    <form [formGroup]="searchForm" (ngSubmit)="performSearch()" class="booking-form">
+
+      <!-- Left Section: Pick-up -->
+      <div class="form-section pickup-section">
+        <label class="section-title">Pick-up</label>
+        <div class="fields-wrapper">
+          <!-- Polje za lokaciju -->
+          <div class="field-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <select formControlName="pickupLocation">
+              <option [ngValue]="null" selected disabled>Location</option>
+              <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+            </select>
+          </div>
+
+          <!-- Polje za datum -->
+          <div class="field-item">
+            <label>
+              <i class="fas fa-calendar-alt"></i>
+              <input type="date" placeholder="Date" formControlName="pickupDate">
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class = "middle-border">
+      </div>
+
+      <!-- Right Section: Drop-off -->
+      <div class="form-section"> <!-- Uklonjena 'pickup-section' klasa -->
+        <label class="section-title">Drop-off</label> <!-- Ispravljen naslov -->
+        <div class="fields-wrapper">
+          <!-- Polje za lokaciju -->
+          <div class="field-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <select formControlName="dropoffLocation"> <!-- Ispravljen formControlName -->
+              <option [ngValue]="null" selected disabled>Location</option>
+              <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+            </select>
+          </div>
+
+          <!-- Polje za datum -->
+          <div class="field-item">
+            <label>
+              <i class="fas fa-calendar-alt"></i>
+              <input type="date" placeholder="Date" formControlName="dropoffDate"> <!-- Ispravljen formControlName -->
+            </label>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!-- Car list starts below -->
+<div class="car-list-section">
+  <div class="list-header">
+    <h2>CHOOSE A CAR</h2>
+    <div class="filter-bar">
+      <button class="filter-button"
+      *ngFor="let category of categories"
+
+      [class.active]="category=== activeCategory"
+      (click) = "filterByCategory(category)">
+      {{category}}
       </button>
     </div>
-
-    <form [formGroup]="searchForm" (ngSubmit)="performSearch()" class="simplified-form">
-
-      <!-- Локација преузимања -->
-      <select formControlName="pickupLocation" class="form-field">
-        <option [ngValue]="null" disabled>Локација преузимања</option>
-        <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
-      </select>
-
-      <!-- Датум преузимања -->
-      <input type="date" formControlName="pickupDate" class="form-field">
-
-      <!-- ВРЕМЕ ПРЕУЗИМАЊА - ДОДАЈ ОВО -->
-      <input type="time" formControlName="pickupTime" class="form-field">
-
-      <!-- Локација враћања -->
-      <select formControlName="dropoffLocation" class="form-field">
-        <option [ngValue]="null" disabled>Локација враћања</option>
-        <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
-      </select>
-
-      <!-- Датум враћања -->
-      <input type="date" formControlName="dropoffDate" class="form-field">
-
-      <!-- ВРЕМЕ ВРАЋАЊА - ДОДАЈ ОВО -->
-      <input type="time" formControlName="dropoffTime" class="form-field">
-
-      <!-- Дугме -->
-      <button type="submit" class="search-button">Претражи</button>
-    </form>
-
-    <div class="card-grid">
-      <app-car-card
-        *ngFor="let c of filteredCars"
-        [car]="c"
-        (removedCar)="deleteCar(c)"
-      ></app-car-card>
-    </div>
+    <!-- We can add filters back here if needed -->
+  </div>
+  <div class="card-list">
+    <app-car-card
+      *ngFor="let c of filteredCars"
+      [car]="c"
+      [searchParams]="searchForm.value"
+      (removedCar)="deleteCar(c)">
+    </app-car-card>
   </div>
 </div>

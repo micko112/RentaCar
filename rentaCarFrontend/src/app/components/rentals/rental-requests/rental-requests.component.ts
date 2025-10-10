@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Rental } from '../../../models/rental.model';
 import { RentalService } from '../../../services/rental.service';
 import { UserService } from '../../../services/user.service';
@@ -11,6 +11,7 @@ import { CarService } from '../../../services/car.service';
   standalone: false,
   styleUrls: ['./rental-requests.component.css']
 })
+
 export class RentalRequestsComponent implements OnInit {
   public pendingRentals: Rental[] = [];      // Zahtevi koje admin vidi
   public clientSpecificRentals: Rental[] = []; // Zahtevi koje klijent vidi

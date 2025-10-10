@@ -1,5 +1,5 @@
 import { Client } from './client.model';
-import { Car } from './car.model';
+import { Car } from './car';
 import { User } from './user.model';
 
 export class Rental {

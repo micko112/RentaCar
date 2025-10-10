@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Car } from '../../../models/car.model';
+import { Car } from '../../../models/car';
 import { Client } from '../../../models/client.model';
 import { Rental } from '../../../models/rental.model';
 import { RentalService } from '../../../services/rental.service';
@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rental-add',
-  standalone: false,
   templateUrl: './rental-add.component.html',
+  standalone: false,
   styleUrls: ['./rental-add.component.css']
 })
 export class RentalAddComponent implements OnInit {

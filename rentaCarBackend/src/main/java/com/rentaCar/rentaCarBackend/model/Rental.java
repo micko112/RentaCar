@@ -57,8 +57,6 @@ public class Rental implements Serializable, DomainEntity {
         this.user = user;
     }
 
-    // --- Ažurirani Getteri i Setteri ---
-
     public int getRentalId() {
         return rentalId;
     }
@@ -118,7 +116,6 @@ public class Rental implements Serializable, DomainEntity {
     public User getUser() {
         return user;
     }
-
     public void setUser(User user) {
         this.user = user;
     }

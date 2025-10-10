@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { Car } from '../../../models/car.model';
-import { CarModel } from '../../../models/car-model.model';
+import { Car } from '../../../models/car';
+import { CarModel } from '../../../models/car-model';
 import { CarModelService } from '../../../services/car-model.service';
 import {FormsModule} from '@angular/forms';
 

@@ -40,7 +40,7 @@ export class LoginClientComponent {
         alert(message); // Prikazaće "Hello, Ime Prezime!"
 
         // Sada radimo ostatak logike
-        if (message !== 'Invalid username or password!') {
+        if (message !== 'Pogrešno korisnicko ime ili prezime!') {
           this.clientService.getAll().subscribe((data) => {
             const clients = data.data.values as Client[];
             const loggedInClient = clients.find(client => client.username === username);

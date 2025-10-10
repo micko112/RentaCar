@@ -46,7 +46,7 @@ public class UserService {
             dto.setUsername(user.getUsername());
             return dto;
         }
-        throw new RuntimeException("Invalid username or password");
+        throw new RuntimeException("Pogrešno korisnicko ime ili prezime");
     }
 
 }

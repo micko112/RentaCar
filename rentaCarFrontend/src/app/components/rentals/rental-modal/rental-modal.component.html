@@ -1,27 +1,24 @@
-<!-- 1. Spoljašnji div služi kao pozadina i hvata klikove za zatvaranje -->
-<div class="modal-backdrop" (click)="cancel()">
-
-  <!-- 2. Unutrašnji div je sam modal. Klik na njega se zaustavlja. -->
+<div class="modal-backdrop">
   <div class="modal-content" (click)="$event.stopPropagation()">
-    <h2>Zahtev za Iznajmljivanje</h2>
-    <p>Vozilo: <strong>{{ car.carModel.name }} ({{ car.licensePlate }})</strong></p>
 
-    <form [formGroup]="rentalForm" (ngSubmit)="submitRequest()">
-      <div class="form-group">
-        <label for="startDate">Datum preuzimanja:</label>
-        <input type="date" id="startDate" formControlName="startDate">
-      </div>
+    <h2 class="price-title">Total price for {{ numberOfDays }} {{ numberOfDays === 1 ? 'dan' : 'dana' }}:
+      <span class="total-price">{{ totalPrice.toFixed(2) }}€</span>
+    </h2>
 
-      <div class="form-group">
-        <label for="endDate">Datum vraćanja:</label>
-        <input type="date" id="endDate" formControlName="endDate">
-      </div>
+    <div class="car-details">
+      <h3>Vehicle Details:</h3>
+      <p><strong>Vehicle:</strong> {{ car.carModel.make }} {{ car.carModel.name }}</p>
+      <p><strong>License Plate:</strong> {{ car.licensePlate }}</p>
+    </div>
 
-      <div class="modal-buttons">
-        <button type="submit" class="button" [disabled]="rentalForm.invalid">Pošalji Zahtev</button>
-        <button type="button" class="button-secondary" (click)="cancel()">Otkaži</button>
-      </div>
-    </form>
+    <div class="terms-text">
+      <p>Prices may vary depending on the season, for travel abroad, or if the daily mileage exceeds 200km. Specific vehicle models are not guaranteed and may be replaced by a similar vehicle. A fee of 10€ applies for vehicle pick-up and drop-off between 23:00 and 06:00. If deep cleaning is required after returning the vehicle, a fee of 80€ applies.</p>
+    </div>
+
+    <div class="modal-buttons">
+      <button type="button" class="button confirm-button" (click)="confirm()">Potvrdi rezervaciju</button>
+      <button type="button" class="button-secondary" (click)="cancel()">Odustani</button>
+    </div>
+
   </div>
-
 </div>

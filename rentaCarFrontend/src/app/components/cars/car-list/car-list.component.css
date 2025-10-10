@@ -1,48 +1,199 @@
-/* --- Stil za listu kartica --- */
+/* --- CSS for car-list.component.css --- */
 
-/* Kontejner koji će ograničiti širinu na velikim ekranima */
-.content-container {
-  width:  100%;
-  max-width: 1200px; /* Maksimalna širina. Kartice se neće širiti više od ovoga. */
-  margin: 0 auto; /* Centriranje kontejnera na stranici */
-  padding: 2rem;
+/* Main top section with the background */
+.search-hero-container {
+  background-color: #121212; /* Fallback in case the image is missing */
+  background-image: url('/assets/images/hero-background.jpg'); /* <-- MAKE SURE TO CHANGE THE IMAGE PATH */
+  background-size: cover;
+  background-position: center;
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: center;
 }
 
-.form-field {
-  flex: 1;
-  min-width: 180px; /* Minimalna širina polja */
+.search-content {
+  width: 100%;
+  max-width: 1100px;
 }
 
-.form-field label {
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
+.search-content h1,
+.search-content h2 {
+  color: #fff;
+  text-transform: uppercase;
+  text-align: left;
+  margin-left: 1rem;
+}
+
+.search-content h1 { font-size: 3rem; margin-bottom: 1rem; }
+.search-content h2 { font-size: 1rem; margin-bottom: 2rem; }
+
+/* Container for the entire form */
+.booking-form {
+  background-color: rgba(30, 30, 30, 0.9);
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+}
+.middle-border{
+  border: 1px solid #444;
+}
+/* Sections for 'Pick-up' and 'Drop-off' */
+.form-section {
+  flex: 1; /* They take up equal space */
+  min-width: 300px; /* Minimum width before wrapping */
+  padding: 1rem;
+}
+
+
+
+.section-title {
+  text-align: left;
+  color: #aaa;
   display: block;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
 }
 
-/*
-  MENJAMO .card-grid U .card-list
-  Ovo će poređati kartice jednu ispod druge.
-*/
+.fields-wrapper {
+  display: flex;
+  gap: 1rem;
+}
+
+.field-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #bbb;
+}
+
+.field-item i {
+  font-size: 1.1rem;
+}
+
+.field-item input,
+.field-item select {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #555;
+  color: #fff;
+  width: 100%;
+  padding: 8px 0;
+  font-size: 1rem;
+  outline: none;
+  appearance: none;
+}
+
+.field-item select option {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Kalendar ikonica bela */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+/* Hover efekat za input */
+.field-item input:hover,
+.field-item select:hover {
+  border-bottom-color: #888;
+}
+
+/* Label da ikonica i input budu u liniji i klik rade zajedno */
+.field-item label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  cursor: text;
+}
+
+/* Header for the car list */
+.car-list-section {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.list-header h2 {
+  text-align: left;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
 .card-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Razmak između kartica */
+  gap: 1.5rem;
 }
 
-.search-bar {
-  display: flex;
-  justify-content: center;
+/* Responsiveness */
+@media (max-width: 900px) {
+  .booking-form {
+    flex-direction: column;
+  }
+  .pickup-section {
+    border-right: none;
+    border-bottom: 1px solid #444;
+    padding-bottom: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .fields-wrapper {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+.list-header {
+  border-bottom: 1px solid #333;
   margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
 }
 
-.search-input {
-  width: 100%;
-  max-width: 400px;
+.list-header h2 {
+  text-align: left;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: 1px;
 }
 
-/*
-  NAJVAŽNIJI DEO - GRID RASPORED
-  Koristimo CSS Grid jer je moderniji i moćniji od Flexbox-a za ovakve stvari.
-*/
+.filter-bar {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+.button {
+  color: #fff;
+}
+.filter-button {
+  background: none;
+  border: none;
+  color: #888; /* Сива боја за неактивне */
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0 0 10px 0; /* Само доњи padding за простор испод линије */
+  border-bottom: 3px solid transparent; /* Провидна линија */
+  transition: color 0.3s, border-color 0.3s;
+}
 
+.filter-button:hover {
+  color: #95f0ff;
+}
+
+/* Стил за активно дугме */
+.filter-button.active {
+  color: #fff; /* Бела боја за активно */
+  border-bottom-color: #007bff; /* Плава линија испод */
+}

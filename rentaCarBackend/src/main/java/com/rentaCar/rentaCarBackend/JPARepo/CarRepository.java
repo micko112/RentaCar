@@ -9,10 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-/**
- *
- * @author Saki
- */
+
 public interface CarRepository extends JpaRepository<Car, Integer> {
 
     List<Car> findByLicensePlateStartsWith(String licensePlate);
