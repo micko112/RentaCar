@@ -22,7 +22,7 @@ public class RentalController {
         }
 
         @PostMapping("/add")
-        public ResponseEntity<Response> addRental(@RequestBody RentalDTO rental) { // IZMENA
+        public ResponseEntity<Response> addNewRental(@RequestBody RentalDTO rental) { // IZMENA
                 String result = rentalService.addRental(rental); // IZMENA
                 HttpStatus status = "Created the rental successfully!".equals(result) ? HttpStatus.OK : HttpStatus.BAD_REQUEST; // IZMENA
 
@@ -69,7 +69,7 @@ public class RentalController {
         @PostMapping("/delete")
         public ResponseEntity<Response> deleteRental(@RequestBody int rentalId) { // IZMENA
                 String result = rentalService.deleteRental(rentalId); // IZMENA
-                HttpStatus status = "Deleted the rental successfully!".equals(result) ? HttpStatus.OK : HttpStatus.BAD_REQUEST; // IZMENA
+                HttpStatus status = "Ugovor je uspešno obrisan!".equals(result) ? HttpStatus.OK : HttpStatus.BAD_REQUEST; // IZMENA
 
                 return ResponseEntity.status(status)
                         .body(HttpResponse.getResponseWithData(result, Map.of("value", result), status));

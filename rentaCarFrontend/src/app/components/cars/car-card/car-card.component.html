@@ -27,6 +27,7 @@
 
     <!-- Right side: Price -->
     <div class="price-section">
+      <ng-container *ngIf="userService.getUserStatus() !== 'admin'">
       <div class="price-wrapper">
         <div class="booking-button-wrapper">
           <button class="button" (click)="requestRental()">REZERVIŠI</button>
@@ -34,25 +35,55 @@
         <div class = "price-info">
           <ng-container *ngIf="numberOfDays > 0; else fromPrice">
             <span class="total-price">{{ totalPrice.toFixed(2) }}€</span>
-            <span class="price-details">for {{ numberOfDays }} {{ numberOfDays === 1 ? 'day' : 'days' }}</span>
-            <span class="price-details">{{ pricePerDay.toFixed(2) }}€ /day</span>
+            <span class="price-details">for {{ numberOfDays }} {{ numberOfDays === 1 ? 'dan' : 'dana' }}</span>
+            <span class="price-details">{{ pricePerDay.toFixed(2) }}€ / dan</span>
           </ng-container>
           </div>
         <div class = "show-more">
           <ng-template #fromPrice>
             <span class="from-text">Od  </span>
-            <span class="price">{{ car.carModel.priceTier46plus }}€<span class="per-day">  /dan</span></span>
+            <span class="price">{{ car.carModel.priceTier46plus }}€<span class="per-day">  / dan</span></span>
           </ng-template>
         </div>
-
       </div>
-      <!-- CORRECTION: (click) event is now here -->
-      <button type="button" class="details-toggle" (click)="toggleDetails()">
-        {{ isDetailsVisible ? 'SAKRIJ' : 'PRIKAži' }}
+     </ng-container>
+      <div class="admin-actions" *ngIf="userService.getUserStatus() === 'admin'">
+        <button class="button" (click)="update(); $event.stopPropagation();">Izmeni</button>
+        <button class="button-danger" (click)="delete(car); $event.stopPropagation();">Obriši</button>
+      </div>
+      <button type="button" class="details-toggle" (click)="toggleDetails(); $event.stopPropagation();">
+        {{ isDetailsVisible ? 'SAKRIJ DETALJE' : 'PRIKAžI DETALJE' }}
         <i class="fas" [class.fa-chevron-up]="isDetailsVisible" [class.fa-chevron-down]="!isDetailsVisible"></i>
       </button>
-    </div>
+      </div>
   </div>
+      <!-- CORRECTION: (click) event is now here -->
+
+<!--      <ng-container *ngIf="userService.getUserStatus() !== 'admin'">-->
+<!--        <div class="booking-button-wrapper">-->
+<!--          <button class="button" (click)="requestRental(); $event.stopPropagation();">Reserve</button>-->
+<!--        </div>-->
+<!--        <div class="price-wrapper">-->
+<!--          <div *ngIf="numberOfDays > 0; else fromPrice">-->
+<!--            <span class="total-price">{{ totalPrice.toFixed(2) }}€</span>-->
+<!--            <span class="price-details">for {{ numberOfDays }} {{ numberOfDays === 1 ? 'dan' : 'dana' }}</span>-->
+<!--          </div>-->
+<!--          <ng-template #fromPrice>-->
+<!--            <span class="from-text">from</span>-->
+<!--            <span class="price">{{ car.carModel.priceTier46plus }}€<span class="per-day"> /day</span></span>-->
+<!--          </ng-template>-->
+<!--        </div>-->
+<!--      </ng-container>-->
+
+      <!-- View for ADMIN -->
+
+
+<!--      <button type="button" class="details-toggle" (click)="toggleDetails(); $event.stopPropagation();">-->
+<!--        {{ isDetailsVisible ? 'Sakrij' : 'Više' }}-->
+<!--        <i class="fas" [class.fa-chevron-up]="isDetailsVisible" [class.fa-chevron-down]="!isDetailsVisible"></i>-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </div>-->
 
   <!-- BOTTOM PART OF THE CARD (hidden) -->
   <div class="card-details-content" *ngIf="isDetailsVisible">
@@ -89,3 +120,9 @@
   (closeModal)="closeModal()"
   (confirmRental)="handleRentalConfirmation()">
 </app-rental-modal>
+<app-car-update-modal
+  *ngIf="edit"
+  [car]="car"
+  (saveCar)="onSave($event)"
+  (closeModal)="edit = false">
+</app-car-update-modal>

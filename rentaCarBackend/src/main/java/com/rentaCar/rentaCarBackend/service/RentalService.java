@@ -60,7 +60,7 @@ public class RentalService {
                         .map(rentalMapper::toDomainDTO) // Značajno pojednostavljeno
                         .collect(Collectors.toList());
         }
-
+@Transactional
         public String addRental(RentalDTO rentalDTO) {
                 try {
                         Rental rental = new Rental();
@@ -71,7 +71,11 @@ public class RentalService {
 
                         // Povezivanje postojećih entiteta iz baze
                         clientRepository.findById(rentalDTO.getClient().getJmbg()).ifPresent(rental::setClient);
-                        carRepository.findById(rentalDTO.getCar().getId()).ifPresent(rental::setCar);
+                        carRepository.findById(rentalDTO.getCar().getId()).ifPresent(car -> {
+                                car.setStatus(0);
+                                carRepository.save(car);
+                                rental.setCar(car);
+                        });
                         if (rentalDTO.getUser() != null) {
                                 userRepository.findById(rentalDTO.getUser().getId()).ifPresent(rental::setUser);
                         }
@@ -85,10 +89,27 @@ public class RentalService {
 
         public String deleteRental(int rentalId) {
                 try {
-                        rentalRepository.deleteById(rentalId);
-                        return "Deleted the rental successfully!";
+                        // 1. Find the contract to be deleted
+                        Rental rentalToDelete = rentalRepository.findById(rentalId)
+                                .orElseThrow(() -> new RuntimeException("Ugovor sa ID-jem " + rentalId + " nije pronađen!"));
+
+                        // 2. Get the car from that contract
+                        Car carToUpdate = rentalToDelete.getCar();
+
+                        // 3. Update the car's status to 1 (Available)
+                        if (carToUpdate != null) {
+                                carToUpdate.setStatus(1);
+                                carRepository.save(carToUpdate); // Save the change in the car's status
+                        }
+
+                        // 4. Now delete the contract
+                        rentalRepository.delete(rentalToDelete);
+
+                        return "Ugovor je uspešno obrisan!";
+
                 } catch (Exception ex) {
-                        return "Cannot delete this rental!";
+                        ex.printStackTrace(); // For debugging
+                        return "Brisanje ugovora nije uspelo! Greška: " + ex.getMessage();
                 }
         }
 

@@ -1,57 +1,46 @@
-<!-- Koristimo .modal-backdrop kao pozadinu koja prekriva samo karticu -->
-<div class="modal-backdrop" (click)="cancel()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <h2>Izmena Podataka o Vozilu</h2>
+<div class="modal-content" (click)="$event.stopPropagation()">
+  <h2>Izmeni podatke o vozilu</h2>
 
-    <!-- Koristimo istu .form-grid strukturu kao za dodavanje -->
-    <div class="form-grid">
-
-      <!-- LEVA KOLONA -->
-      <div class="form-column">
-        <div class="form-group">
-          <label>Registarska oznaka:</label>
-          <input type="text" [(ngModel)]="tempCar.licensePlate" />
-        </div>
-
-        <div class="form-group">
-          <label>Godište:</label>
-          <input type="number" [(ngModel)]="tempCar.year" />
-        </div>
-
-        <label>Transmission:
-          <input type="text" [(ngModel)]="tempCar.carModel.transmission" />
-        </label>
-        <!-- ... -->
-
+  <div class="form-grid">
+    <!-- LEFT COLUMN -->
+    <div class="form-column">
+      <div class="form-group">
+        <label>Registraciona oznaka:</label>
+        <input type="text" [(ngModel)]="tempCar.licensePlate" />
       </div>
-
-      <!-- DESNA KOLONA -->
-      <div class="form-column">
-        <div class="form-group">
-          <label>Model vozila:</label>
-          <select [(ngModel)]="tempCar.carModel">
-            <option *ngFor="let model of carModels" [ngValue]="model">
-              {{ model.name }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Napomene:</label>
-          <input type="text" [(ngModel)]="tempCar.notes" />
-        </div>
-
-        <label>Image URL:
-          <input type="text" [(ngModel)]="tempCar.carModel.pictureUrl" />
-        </label>
+      <div class="form-group">
+        <label>Godina proizvodnje:</label>
+        <input type="number" [(ngModel)]="tempCar.year" />
       </div>
-
+      <div class="form-group">
+        <label>Status:</label>
+        <select [(ngModel)]="tempCar.status">
+          <option [ngValue]="1">Dostupno</option>
+          <option [ngValue]="0">Iznajmljeno</option>
+        </select>
+      </div>
     </div>
 
-    <!-- DUGMAD -->
-    <div class="modal-buttons">
-      <button class="button" (click)="save()">Sačuvaj</button>
-      <button class="button button-secondary" (click)="cancel()">Otkaži</button>
+    <!-- RIGHT COLUMN -->
+    <div class="form-column">
+      <div class="form-group">
+        <label>Model Vozila</label>
+        <select [(ngModel)]="tempCar.carModel" [compareWith]="compareModels">
+          <option *ngFor="let model of carModels" [ngValue]="model">
+            {{ model.make }} {{ model.name }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Napomena:</label>
+        <textarea [(ngModel)]="tempCar.notes" rows="5"></textarea>
+      </div>
     </div>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="modal-buttons">
+    <button class="button" (click)="save()">SAČUVAJ</button>
+    <button class="button button-secondary" (click)="cancel()">ODUSTANI</button>
   </div>
 </div>

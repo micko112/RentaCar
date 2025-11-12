@@ -23,19 +23,20 @@ export class CarUpdateModalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Kreiramo kopiju da ne bismo menjali original dok se ne klikne 'Save'
-    this.tempCar = { ...this.car };
-
+    // JSON.parse(JSON.stringify(...)) is a trick for making a deep copy of an object
+    this.tempCar = JSON.parse(JSON.stringify(this.car));
+    alert('Vozilo je uspešno izabrano!');
+    // We load all models for the dropdown
     this.carModelService.getAllCarModels().subscribe({
       next: (res) => {
         this.carModels = res.data.values as CarModel[];
-        // Postavljamo selektovani model u dropdown-u
-        const match = this.carModels.find(m => m.id === this.car.carModel.id);
+
+        // We ensure that the current model is selected in the dropdown
+        const match = this.carModels.find(m => m.id === this.tempCar.carModel.id);
         if (match) {
           this.tempCar.carModel = match;
         }
       },
-      error: (err) => console.error(err)
     });
   }
 
@@ -46,5 +47,8 @@ export class CarUpdateModalComponent implements OnInit {
 
   cancel() {
     this.closeModal.emit();
+  }
+  compareModels(m1: CarModel, m2: CarModel): boolean {
+    return m1 && m2 ? m1.id === m2.id : m1 === m2;
   }
 }

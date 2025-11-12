@@ -84,7 +84,7 @@ export class CarCardComponent implements OnChanges {
   // This method is called by the "Reserve Now" button
   requestRental() {
     if (this.numberOfDays <= 0) {
-      alert("Please select a valid rental period in the form at the top of the page first.");
+      alert("Unesite dobar datum!");
       return;
     }
     this.showRentalModal = true; // Open the modal
@@ -107,7 +107,7 @@ export class CarCardComponent implements OnChanges {
 
     this.rentalService.addNewRental(rental).subscribe({
       next: (res) => {
-        alert('Rental request has been sent successfully!');
+        alert('Zahtev je poslat uspešno!');
         this.closeModal(); // Close the modal after successful submission
       },
       error: (err) => {
@@ -120,11 +120,11 @@ export class CarCardComponent implements OnChanges {
       next: (res) => {
         this.car = updatedCar;
         this.edit = false;
-        alert('Uspešno ažuriran automobil!');
+        alert('Vozilo je uspešno izmenjeno.');
       },
       error: (err) => {
         console.error(err);
-        alert('Ažuriranje automobila nije uspelo!');
+        alert('Sistem ne može da izmeni vozilo po zadatim vrednostima.');
       },
     });
   }
@@ -134,7 +134,10 @@ export class CarCardComponent implements OnChanges {
   }
 
   update() {
+    console.log('--- UPDATE CLICKED ---');
+    console.log('Before change, this.edit is:', this.edit);
     this.edit = true;
+    console.log('After change, this.edit is:', this.edit);
   }
 
   rentCar(car: Car) {

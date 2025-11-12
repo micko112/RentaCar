@@ -52,11 +52,11 @@ export class CarAddComponent implements OnInit {
 
     this.carService.addNewCar(carData).subscribe({
       next: (res) => {
-        alert('Vehicle has been added successfully!');
+        alert('Vozilo je uspešno kreirano.');
         this.router.navigate(['/cars']);
       },
       error: (err) => {
-        alert('Failed to add the vehicle!');
+        alert('Sistem ne može da kreira vozilo.');
         console.error(err);
       },
     });

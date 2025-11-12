@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RestController
 @RequestMapping("/clients") // IZMENA
 public class ClientController {
@@ -59,7 +59,9 @@ public class ClientController {
         @PostMapping("/update")
         public ResponseEntity<Response> updateClient(@RequestBody ClientDTO client) { // IZMENA
                 String result = clientService.updateClient(client); // IZMENA
-                HttpStatus status = "Updated the client successfully!".equals(result) ? HttpStatus.OK : HttpStatus.BAD_REQUEST; // IZMENA
+                HttpStatus status = "Klijent je ažuriran uspešno!".equals(result)
+                        ? HttpStatus.OK
+                        : HttpStatus.BAD_REQUEST;
 
                 return ResponseEntity.status(status)
                         .body(HttpResponse.getResponseWithData(result, Map.of("value", result), status));
@@ -80,10 +82,12 @@ public class ClientController {
                                 HttpStatus.OK));
         }
 
-        @PostMapping("/delete")
-        public ResponseEntity<Response> deleteClient(@RequestBody String clientId) { // IZMENA
-                String result = clientService.deleteClient(clientId); // IZMENA
-                HttpStatus status = "Deleted the client successfully!".equals(result) ? HttpStatus.OK : HttpStatus.BAD_REQUEST; // IZMENA
+        @DeleteMapping("/delete/{clientId}")
+        public ResponseEntity<Response> deleteClient(@PathVariable String clientId) {
+                String result = clientService.deleteClient(clientId);
+                HttpStatus status = "Klijent je obrisan uspešno!".equals(result)
+                        ? HttpStatus.OK
+                        : HttpStatus.BAD_REQUEST;
 
                 return ResponseEntity.status(status)
                         .body(HttpResponse.getResponseWithData(result, Map.of("value", result), status));

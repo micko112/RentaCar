@@ -22,7 +22,7 @@ public class CarController {
 
         @PostMapping("/add")
         public ResponseEntity<Response> addCar(@RequestBody CarDTO car) { // IZMENA
-                String result = carService.addCar(car); // IZMENA
+                        String result = carService.addCar(car); // IZMENA
 
                 HttpStatus status = result.equals("Successfully created a car!") ? HttpStatus.OK : HttpStatus.BAD_REQUEST; // IZMENA
 
@@ -40,7 +40,7 @@ public class CarController {
         }
 
         @GetMapping("/search/{searchRequest}")
-        public ResponseEntity<Response> searchCar(@PathVariable("searchRequest") String searchRequest) { // IZMENA
+        public ResponseEntity<Response> filterByCategory(@PathVariable("searchRequest") String searchRequest) { // IZMENA
                 return ResponseEntity.ok(
                         HttpResponse.getResponseWithData(
                                 "Searched cars:", // IZMENA

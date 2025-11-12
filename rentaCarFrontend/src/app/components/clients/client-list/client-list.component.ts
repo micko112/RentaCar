@@ -36,11 +36,32 @@ export class ClientListComponent implements OnInit {
     }
   }
 
-  deleteClient(c: Client) {
-    this.clientService.deleteClient(c.jmbg).subscribe((res) => {
-      alert(res.message);
-      this.clients = this.clients.filter(client => client.jmbg !== c.jmbg);
-      this.filteredClients = this.clients;
+  deleteClient(clientToDelete: Client) {
+    this.clientService.deleteClient(clientToDelete.jmbg).subscribe({
+      next: (res) => {
+        alert('Klijent je uspešno obrisan!');
+        this.clients = this.clients.filter(c => c.jmbg !== clientToDelete.jmbg);
+        this.filteredClients = this.filteredClients.filter(c => c.jmbg !== clientToDelete.jmbg);
+      },
+      error: (err) => {
+        alert('Brisanje klijenta nije uspelo!');
+      }
+    });
+  }
+  handleClientUpdate(updatedClient: Client) {
+    this.clientService.updateClient(updatedClient).subscribe({
+      next: (res) => {
+        alert('Podaci o klijentu su uspešno ažurirani!');
+        const index = this.clients.findIndex(c => c.jmbg === updatedClient.jmbg);
+        if (index !== -1) {
+          this.clients[index] = updatedClient;
+          // Refresh the filtered list as well to reflect changes immediately
+          this.onSearch((document.getElementById('search') as HTMLInputElement).value);
+        }
+      },
+      error: (err) => {
+        alert('Ažuriranje podataka nije uspelo!');
+      }
     });
   }
 }

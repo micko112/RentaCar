@@ -59,25 +59,41 @@ export class RentalAddComponent implements OnInit {
     rental.endDate = this.newRentalForm.get('endDate')!.value;
     rental.notes = this.newRentalForm.get('notes')!.value;
 
-    let car: Car = this.newRentalForm.get('car')!.value;
-    car.status = 0; // Postavi status na "Not available"
+    let carToUpdate: Car = this.newRentalForm.get('car')!.value;
+    carToUpdate.status = 0; // Postavi status na "Not available" (Iznajmljen)
 
-    // Prvo ažuriraj status automobila
-    this.carService.updateCar(car).subscribe();
-
-    rental.car = car;
+    rental.car = carToUpdate;
     rental.client = this.newRentalForm.get('client')!.value;
     rental.status = 1; // Admin kreira direktno potvrđen rental
     rental.user = this.userService.getLoggedInUser();
 
-    this.rentalService.addNewRental(rental).subscribe({
-      next: (res) => {
-        alert('Ugovor o iznajmljivanju je uspešno kreiran!');
-        this.router.navigate(['/rentals']);
+    // --- ISPRAVLJENA LOGIKA ---
+
+    // 1. Прво покушај да ажурираш статус аутомобила
+    this.carService.updateCar(carToUpdate).subscribe({
+      next: (updateCarResponse) => {
+        console.log('Status automobila uspešno ažuriran.', updateCarResponse);
+
+        // 2. ТЕК АКО ЈЕ ТО УСПЕЛО, креирај нови уговор
+        this.rentalService.addNewRental(rental).subscribe({
+          next: (addRentalResponse) => {
+            alert('Ugovor o iznajmljivanju је uspešno kreiran.');
+            this.router.navigate(['/rentals']);
+          },
+          error: (rentalErr) => {
+            console.error('Greška pri kreiranju ugovora:', rentalErr);
+            alert('Sistem ne može da kreira Ugovor o iznajmljivanju.');
+
+            // Opciono: ako kreiranje ugovora ne uspe, vrati status auta na 1 (Available)
+            carToUpdate.status = 1;
+            this.carService.updateCar(carToUpdate).subscribe(); // Fire-and-forget rollback
+          }
+        });
       },
-      error: (err) => {
-        alert('Kreiranje ugovora nije uspelo!');
-      },
+      error: (carErr) => {
+        console.error('Greška pri ažuriranju statusa automobila:', carErr);
+        alert('Nije moguće ažurirati status vozila. Kreiranje ugovora je prekinuto.');
+      }
     });
   }
-}
+  }

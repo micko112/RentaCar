@@ -1,19 +1,19 @@
 <div class="search-hero-container">
   <div class="search-content">
-    <h1>RENT A CAR IN BELGRADE</h1>
-    <h2>CHOOSE LOCATIONS AND DATES</h2>
+    <h1>RENT A CAR BEOGRAD</h1>
+    <h2 *ngIf="userService.getUserStatus() === 'user'" >IZABERITE LOKACIJU I VREME</h2>
 
-    <form [formGroup]="searchForm" (ngSubmit)="performSearch()" class="booking-form">
+    <form [formGroup]="searchForm" (ngSubmit)="performSearch()" *ngIf="userService.getUserStatus() === 'user'" class="booking-form">
 
       <!-- Left Section: Pick-up -->
       <div class="form-section pickup-section">
-        <label class="section-title">Pick-up</label>
+        <label class="section-title">Preuzimanje</label>
         <div class="fields-wrapper">
           <!-- Polje za lokaciju -->
           <div class="field-item">
             <i class="fas fa-map-marker-alt"></i>
             <select formControlName="pickupLocation">
-              <option [ngValue]="null" selected disabled>Location</option>
+                <option [ngValue]="null" selected disabled>Lokacija</option>
               <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
             </select>
           </div>
@@ -33,13 +33,13 @@
 
       <!-- Right Section: Drop-off -->
       <div class="form-section"> <!-- Uklonjena 'pickup-section' klasa -->
-        <label class="section-title">Drop-off</label> <!-- Ispravljen naslov -->
+        <label class="section-title">Vraćanje</label> <!-- Ispravljen naslov -->
         <div class="fields-wrapper">
           <!-- Polje za lokaciju -->
           <div class="field-item">
             <i class="fas fa-map-marker-alt"></i>
             <select formControlName="dropoffLocation"> <!-- Ispravljen formControlName -->
-              <option [ngValue]="null" selected disabled>Location</option>
+              <option [ngValue]="null" selected disabled>Lokacija</option>
               <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
             </select>
           </div>
@@ -61,15 +61,25 @@
 <!-- Car list starts below -->
 <div class="car-list-section">
   <div class="list-header">
-    <h2>CHOOSE A CAR</h2>
-    <div class="filter-bar">
-      <button class="filter-button"
-      *ngFor="let category of categories"
+    <h2>IZABERI VOZILO</h2>
+    <div class="filter-and-actions-bar">
+      <!-- Filters are now inside their own container -->
+      <div class="filter-bar">
+        <button
+          class="filter-button"
+          *ngFor="let category of categories"
+          [class.active]="category === activeCategory"
+          (click)="filterByCategory(category)">
+          {{category}}
+        </button>
+      </div>
 
-      [class.active]="category=== activeCategory"
-      (click) = "filterByCategory(category)">
-      {{category}}
-      </button>
+      <!-- Add button, visible only to admin -->
+      <div class="add-button-container" *ngIf="userService.getUserStatus() === 'admin'">
+        <button class="button add-button" routerLink="/cars/add">
+          + DODAJ VOZILO
+        </button>
+      </div>
     </div>
     <!-- We can add filters back here if needed -->
   </div>

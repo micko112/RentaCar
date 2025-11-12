@@ -21,7 +21,7 @@ export class ClientService {
   }
 
   public deleteClient(jmbg: string): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/clients/delete`, jmbg);
+    return this.http.delete<any>(`${environment.apiUrl}/clients/delete/${jmbg}`);
   }
 
   public login(username: string, password: string): Observable<any> {

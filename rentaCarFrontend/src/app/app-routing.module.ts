@@ -13,6 +13,7 @@ import { ClientAddComponent } from './components/clients/client-add/client-add.c
 import { RentalListComponent } from './components/rentals/rental-list/rental-list.component';
 import { RentalAddComponent } from './components/rentals/rental-add/rental-add.component';
 import { RentalRequestsComponent } from './components/rentals/rental-requests/rental-requests.component';
+import {CarModelAddComponent} from './components/cars/car-model-add/car-model-add.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
 
   //  Automobili (Cars)
   { path: 'cars', component: CarListComponent },
-  { path: 'cars/add', component: CarAddComponent }, // Ruta za dodavanje novog auta
+  { path: 'cars/add', component: CarAddComponent },
+  { path: 'car-models/add', component: CarModelAddComponent } , // Ruta za dodavanje novog auta
 
   //  Klijenti (Clients)
   { path: 'clients', component: ClientListComponent },

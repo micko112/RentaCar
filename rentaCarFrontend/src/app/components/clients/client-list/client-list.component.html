@@ -12,7 +12,8 @@
     <app-client-card
       *ngFor="let c of filteredClients"
       [client]="c"
-      (removedClient)="deleteClient(c)">
+      (removedClient)="deleteClient($event)"
+      (updatedClient)="handleClientUpdate($event)">
     </app-client-card>
   </div>
 </div>

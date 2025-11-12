@@ -85,7 +85,7 @@ public class ClientService {
         try {
             Client client = clientRepository.findByUsername(username);
             if (client != null && client.getPassword().equals(password)) {
-                return "Dobrodošli, " + client.getName() + " " + client.getSurname() + "!";
+                return "Klijent je uspešno prijavljen!";
             }
         } catch (Exception ex) {
             return "Pogrešno korisnicko ime ili prezime!";

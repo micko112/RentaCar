@@ -1,18 +1,21 @@
 <div class="modal-backdrop">
   <div class="modal-content" (click)="$event.stopPropagation()">
 
-    <h2 class="price-title">Total price for {{ numberOfDays }} {{ numberOfDays === 1 ? 'dan' : 'dana' }}:
+    <h2 class="price-title">Ukupna cena za {{ numberOfDays }} {{ numberOfDays === 1 ? 'dan' : 'dana' }}:
       <span class="total-price">{{ totalPrice.toFixed(2) }}€</span>
     </h2>
 
     <div class="car-details">
-      <h3>Vehicle Details:</h3>
-      <p><strong>Vehicle:</strong> {{ car.carModel.make }} {{ car.carModel.name }}</p>
-      <p><strong>License Plate:</strong> {{ car.licensePlate }}</p>
+      <h3>Detalji Vozila:</h3>
+      <p><strong>Vozilo:</strong> {{ car.carModel.make }} {{ car.carModel.name }}</p>
+      <p><strong>Registarska oznaka:</strong> {{ car.licensePlate }}</p>
     </div>
 
     <div class="terms-text">
-      <p>Prices may vary depending on the season, for travel abroad, or if the daily mileage exceeds 200km. Specific vehicle models are not guaranteed and may be replaced by a similar vehicle. A fee of 10€ applies for vehicle pick-up and drop-off between 23:00 and 06:00. If deep cleaning is required after returning the vehicle, a fee of 80€ applies.</p>
+      <p>Cene mogu varirati u zavisnosti od sezone, putovanja u inostranstvo
+        ili ako dnevna kilometraža premaši 200 km. Određeni modeli vozila nisu zagarantovani
+        i mogu biti zamenjeni sličnim vozilom. Naknada od 10 € se naplaćuje za preuzimanje i vraćanje vozila između
+        23:00 i 06:00 časova. Ukoliko je nakon vraćanja vozila potrebno dubinsko čišćenje, naplaćuje se naknada od 80 €.</p>
     </div>
 
     <div class="modal-buttons">

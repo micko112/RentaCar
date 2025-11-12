@@ -1,13 +1,13 @@
 <div class="form-page-container">
   <div class="form-container">
     <form [formGroup]="newCarForm" (ngSubmit)="addCar()">
-      <h1>Add New Vehicle</h1>
+      <h1>Dodaj Novo Vozilo</h1>
 
       <div class="form-row">
         <div class="form-group">
-          <label for="carModel">Vehicle Model</label>
+          <label for="carModel">Model Vozila</label>
           <select id="carModel" formControlName="carModel">
-            <option [ngValue]="null" disabled>Select an existing model</option>
+            <option [ngValue]="null" disabled>Izaberite model</option>
             <option *ngFor="let model of carModels" [ngValue]="model">{{ model.make }} {{ model.name }}</option>
           </select>
         </div>
@@ -15,24 +15,24 @@
 
       <div class="form-row">
         <div class="form-group">
-          <label for="licensePlate">License Plate</label>
+          <label for="licensePlate">Registraciona oznaka</label>
           <input type="text" id="licensePlate" formControlName="licensePlate" placeholder="E.g., BG-123-TX">
         </div>
         <div class="form-group">
-          <label for="year">Year</label>
+          <label for="year">Godina proizvodnje</label>
           <input type="number" id="year" formControlName="year" placeholder="E.g., 2022">
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group">
-          <label for="notes">Notes</label>
-          <textarea id="notes" formControlName="notes" placeholder="Additional information..."></textarea>
+          <label for="notes">Napomena</label>
+          <textarea id="notes" formControlName="notes" placeholder="Dodatne informacije.."></textarea>
         </div>
       </div>
 
       <div class="form-buttons">
-        <button type="submit" class="button" [disabled]="newCarForm.invalid">Add Vehicle</button>
+        <button type="submit" class="button" [disabled]="newCarForm.invalid">DODAJ VOZILO</button>
       </div>
     </form>
   </div>

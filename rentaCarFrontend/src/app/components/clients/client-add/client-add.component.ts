@@ -24,10 +24,10 @@ export class ClientAddComponent implements OnInit {
   ) {
     this.newClientForm = formBuilder.group({
       jmbg: new FormControl('', [Validators.required, Validators.pattern(/^\d{13}$/)]),
-      name: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]),
-      surname: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]),
+      name: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-zČčĆćŠšĐđŽž\s]+$/)]),
+      surname: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-zČčĆćŠšĐđŽž\s]+$/)]),
       age: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]),
-      mobile: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]),
+      mobile: new FormControl('', [Validators.required, Validators.pattern(/^[0-9+\-\s\/]+$/)]),
       city: new FormControl(null, Validators.required),
       username: new FormControl('', Validators.required),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),

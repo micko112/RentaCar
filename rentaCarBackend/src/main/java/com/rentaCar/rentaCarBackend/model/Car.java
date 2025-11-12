@@ -28,7 +28,7 @@ public class Car implements Serializable, DomainEntity {
     // --- Getters and Setters ---
 
     public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public void setId(int carId) { this.id = carId; }
     public String getLicensePlate() { return licensePlate; }
     public void setLicensePlate(String licensePlate) { this.licensePlate = licensePlate; }
     public int getYear() { return year; }

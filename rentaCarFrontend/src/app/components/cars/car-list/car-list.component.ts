@@ -48,14 +48,14 @@ export class CarListComponent implements OnInit {
   deleteCar(c: Car) {
     this.carService.delete(c.id).subscribe({
       next: (res) => {
-        alert('Uspešno obrisan automobil!');
+        alert('Vozilo je uspešno obrisano!');
         // Ukloni auto iz lokalne liste da se odmah osveži prikaz
         this.cars = this.cars.filter(car => car.id !== c.id);
         this.filteredCars = this.cars;
       },
       error: (err) => {
         console.error(err);
-        alert('Brisanje automobila nije uspelo!');
+        alert('Nažalost nema dostupnih vozila.');
       },
     });
   }
