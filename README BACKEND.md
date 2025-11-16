@@ -1,131 +1,132 @@
-# Rent-a-Car Frontend (Angular)
+# BACKEND 
 
-This is the Angular frontend for the Rent-a-Car Management System.  
-It provides the user interface for authentication, car management, client management and rental operations.  
-The frontend communicates with the Spring Boot backend via a REST API.
+
+# Rent-a-Car Backend (Spring Boot)
+
+This is the Spring Boot backend for the Rent-a-Car Management System.  
+It exposes a REST API used by the Angular frontend for managing cars, car models, cities, clients, rentals and users.
 
 ## Features
 
-### Authentication
-- User login
-- Client login
-- User and client registration
-- Basic route protection and access control
-
-### Cars
-- List all cars
-- Filter cars by category or other criteria
-- Add new car
-- Edit existing car
-- Car card component for displaying car details
-- Car model add and update modals
-
-### Clients
-- Add new client
-- Client list view
-- Client details in separate card component
-- Update client in modal dialog
-- Delete client if needed
-
-### Rentals
-- Create a new rental
-- Select car and client
-- Rental list page (for admins)
-- Rental details in modal
-- Rental requests handling (pending rentals)
-- Cancel or update rental
+- RESTful API for all core entities
+- DTO-based request and response objects
+- Service layer with business logic
+- JPA repositories for database access
+- Separation between domain model and transport objects
+- Basic authentication and user handling
 
 ## Project Structure
 
-Main structure under `src/app`:
+Main package: `com.rentaCar.rentaCarBackend`
 
 ```txt
-src/app/
-│
-├── auth/
-│   ├── login/
-│   │   ├── login.component.ts
-│   │   ├── login.component.html
-│   │   └── login.component.css
-│   ├── login-client/
-│   │   ├── login-client.component.ts
-│   │   ├── login-client.component.html
-│   │   └── login-client.component.css
-│   └── register/
-│       ├── register.component.ts
-│       ├── register.component.html
-│       └── register.component.css
-│
-├── components/
-│   ├── cars/
-│   │   ├── car-add/
-│   │   ├── car-card/
-│   │   ├── car-list/
-│   │   ├── car-model-add/
-│   │   └── car-update-modal/
-│   │
-│   ├── clients/
-│   │   ├── client-add/
-│   │   ├── client-card/
-│   │   ├── client-list/
-│   │   └── client-update-modal/
-│   │
-│   └── rentals/
-│       ├── rental-add/
-│       ├── rental-card/
-│       ├── rental-list/
-│       ├── rental-modal/
-│       └── rental-requests/
+src/main/java/com/rentaCar/rentaCarBackend/
 │
 ├── connection/
-│   └── response.ts
+│   ├── HttpResponse.java
+│   └── Response.java
 │
-├── models/
-│   ├── car.model.ts
-│   ├── car-model.ts
-│   ├── city.model.ts
-│   ├── client.model.ts
-│   ├── rental.model.ts
-│   └── user.model.ts
+├── controller/
+│   ├── CarController.java
+│   ├── CarModelController.java
+│   ├── CityController.java
+│   ├── ClientController.java
+│   ├── RentalController.java
+│   └── UserController.java
 │
-└── services/
-    ├── car.service.ts
-    ├── car-model.service.ts
-    ├── city.service.ts
-    ├── client.service.ts
-    ├── rental.service.ts
-    └── user.service.ts
+├── dto/
+│   ├── CarDTO.java
+│   ├── CarModelDTO.java
+│   ├── CityDTO.java
+│   ├── ClientDTO.java
+│   ├── DomainDTO.java
+│   ├── RentalDTO.java
+│   ├── RequestSearch.java
+│   └── UserDTO.java
+│
+├── JPARepo/
+│   └── (JPA repository interfaces for all entities)
+│
+├── mapper/
+│   └── (mapping logic between entities and DTOs)
+│
+├── model/
+│   ├── Car.java
+│   ├── CarModel.java
+│   ├── City.java
+│   ├── Client.java
+│   ├── Rental.java
+│   └── User.java
+│
+├── service/
+│   ├── CarModelService.java
+│   ├── CarService.java
+│   ├── CityService.java
+│   ├── ClientService.java
+│   ├── RentalService.java
+│   └── UserService.java
+│
+└── RentaCarBackendApplication.java
 ```
-## Technologies
-- Angular
-- TypeScript
-- HTML / CSS
-- Angular Router
-- HTTPClient
-  
-## API Integration
-The frontend consumes REST endpoints from the backend, for example:
-```txt
-GET    /api/cars
-POST   /api/cars
-GET    /api/clients
-POST   /api/rentals
-POST   /api/auth/login
-POST   /api/auth/register
-```
-The base URL is configured in the Angular services.
+## Entities
 
-### Running the Frontend
-From the frontend directory:
-```bash
-npm install
-npm start
-```
-or
-```bash
-ng serve
-```
-The application is available at:
+The backend manages the following main entities:
+
+- **Car** – car information and status  
+- **CarModel** – car model and category  
+- **City** – city / rental location  
+- **Client** – client data  
+- **Rental** – rental period and relations with car and client  
+- **User** – application users (admins, employees, clients)
+
+---
+
+## Controllers and Endpoints
+
+### **CarController**
+- GET /api/cars
+- GET /api/cars/{id}
+- POST /api/cars
+- PUT /api/cars/{id}
+- DELETE /api/cars/{id}
+### **ClientController**
+- GET /api/clients
+- GET /api/clients/{id}
+- POST /api/clients
+- PUT /api/clients/{id}
+- DELETE /api/clients/{id}
+### **RentalController**
+- GET /api/rentals
+- GET /api/rentals/{id}
+- POST /api/rentals
+- PUT /api/rentals/{id}
+- DELETE /api/rentals/{id}
+### **UserController**
+- POST /api/auth/login
+- POST /api/auth/register
+## Technologies
+
+- **Java**
+- **Spring Boot**
+- **Spring Web (REST)**
+- **Spring Data JPA / Hibernate**
+- **MySQL / MariaDB**
+- **Maven**
+## Configuration
+
+Database configuration is located in:
 ```txt
-http://localhost:4200
+src/main/resources/application.properties
+```
+## Running the Backend
+
+From the backend directory:
+
+```bash
+mvn clean install
+mvn spring-boot:run
+```
+The backend will run on:
+```arduino
+http://localhost:8080
 ```
