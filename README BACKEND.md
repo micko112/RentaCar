@@ -1,92 +1,131 @@
-# Rent-a-Car Management System
+# Rent-a-Car Frontend (Angular)
 
-This is a full-stack Rent-a-Car application consisting of a **Spring Boot backend** and an **Angular frontend**.  
-The system enables administrators and staff to manage cars, clients, rentals, cities, car models, and users.  
-It includes authentication, CRUD operations, and a modern UI.
+This is the Angular frontend for the Rent-a-Car Management System.  
+It provides the user interface for authentication, car management, client management and rental operations.  
+The frontend communicates with the Spring Boot backend via a REST API.
 
 ## Features
-
-### Cars
-- Add, edit, delete cars
-- Manage availability (available / rented)
-- Filter by category
-- Car model CRUD
-- City CRUD (pick-up locations)
-
-### Clients
-- Register clients
-- Edit client information
-- Client search
-- Client delete
-
-### Rentals
-- Create a rental
-- Assign car + client
-- Rental list for admin
-- Rental modification
-- Automatic car availability update
-- Rental cancellation logic
 
 ### Authentication
 - User login
 - Client login
-- Register new users or clients
-- Route protection
+- User and client registration
+- Basic route protection and access control
+
+### Cars
+- List all cars
+- Filter cars by category or other criteria
+- Add new car
+- Edit existing car
+- Car card component for displaying car details
+- Car model add and update modals
+
+### Clients
+- Add new client
+- Client list view
+- Client details in separate card component
+- Update client in modal dialog
+- Delete client if needed
+
+### Rentals
+- Create a new rental
+- Select car and client
+- Rental list page (for admins)
+- Rental details in modal
+- Rental requests handling (pending rentals)
+- Cancel or update rental
 
 ## Project Structure
 
-- /frontend --> Angular application
-- /backend --> Spring Boot REST API
-- /docs --> Documentation (optional)
-- /images --> Screenshots
+Main structure under `src/app`:
 
+```txt
+src/app/
+│
+├── auth/
+│   ├── login/
+│   │   ├── login.component.ts
+│   │   ├── login.component.html
+│   │   └── login.component.css
+│   ├── login-client/
+│   │   ├── login-client.component.ts
+│   │   ├── login-client.component.html
+│   │   └── login-client.component.css
+│   └── register/
+│       ├── register.component.ts
+│       ├── register.component.html
+│       └── register.component.css
+│
+├── components/
+│   ├── cars/
+│   │   ├── car-add/
+│   │   ├── car-card/
+│   │   ├── car-list/
+│   │   ├── car-model-add/
+│   │   └── car-update-modal/
+│   │
+│   ├── clients/
+│   │   ├── client-add/
+│   │   ├── client-card/
+│   │   ├── client-list/
+│   │   └── client-update-modal/
+│   │
+│   └── rentals/
+│       ├── rental-add/
+│       ├── rental-card/
+│       ├── rental-list/
+│       ├── rental-modal/
+│       └── rental-requests/
+│
+├── connection/
+│   └── response.ts
+│
+├── models/
+│   ├── car.model.ts
+│   ├── car-model.ts
+│   ├── city.model.ts
+│   ├── client.model.ts
+│   ├── rental.model.ts
+│   └── user.model.ts
+│
+└── services/
+    ├── car.service.ts
+    ├── car-model.service.ts
+    ├── city.service.ts
+    ├── client.service.ts
+    ├── rental.service.ts
+    └── user.service.ts
+```
 ## Technologies
-
-### Frontend
 - Angular
 - TypeScript
-- HTML & CSS
+- HTML / CSS
 - Angular Router
-- RxJS
-
-### Backend
-- Spring Boot
-- JPA / Hibernate
-- MySQL or MariaDB
-- DTO mapping
-- REST API
-
-## How to Run
-
-### Backend
-```bash
-cd backend
-mvn spring-boot:run
+- HTTPClient
+  
+## API Integration
+The frontend consumes REST endpoints from the backend, for example:
+```txt
+GET    /api/cars
+POST   /api/cars
+GET    /api/clients
+POST   /api/rentals
+POST   /api/auth/login
+POST   /api/auth/register
 ```
+The base URL is configured in the Angular services.
 
-### Frontend
+### Running the Frontend
+From the frontend directory:
 ```bash
-cd frontend
 npm install
 npm start
 ```
-
-Access the UI at:
-```arduino
+or
+```bash
+ng serve
+```
+The application is available at:
+```txt
 http://localhost:4200
 ```
-
-Backend runs at:
-```arduino
-http://localhost:8080
-```
-## App Demo
-![App Demo](images/demo.gif)
-
-## Documentation
-[Download Documentation](docs/ProjektnaDokumentacija.pdf)
-
-## Author
-
-Dimitrije Mitić
-Faculty of Organizational Sciences (FON)
