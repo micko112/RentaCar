@@ -88,5 +88,6 @@ http://localhost:8080
 
 ## Author
 
-Dimitrije Mitić
-Faculty of Organizational Sciences (FON)
+**Dimitrije Mitić**
+- Faculty of Organizational Sciences (FON)
+- Information Systems & Technologies
