@@ -80,12 +80,9 @@ Backend runs at:
 ```arduino
 http://localhost:8080
 ```
-
-![Login](images/login.png)
-![Cars](images/cars.png)
-![Rentals](images/rentals.png)
+## App Demo
 ![App Demo](images/demo.gif)
-[Download Video Demo](demo/micko_diplomski.mp4)
+
 ## Documentation
 [Download Documentation](docs/ProjektnaDokumentacija.pdf)
 
